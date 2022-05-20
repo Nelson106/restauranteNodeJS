@@ -1,3 +1,4 @@
+const mesasModels = require("./mesas.models");
 
   
 module.exports = (sequelize, Sequelize) => {
@@ -17,3 +18,5 @@ module.exports = (sequelize, Sequelize) => {
     });
     return Restaurante;
 };
+
+
