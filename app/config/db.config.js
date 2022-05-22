@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 db.config 
 
+=======
+>>>>>>> ce37ef5b63df3f716167836d99f90c0b6e0d4c5a
 module.exports = {
     HOST: "localhost",
     USER: "postgres",

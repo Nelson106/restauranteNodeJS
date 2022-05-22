@@ -1,4 +1,4 @@
-const mesasModels = require("./mesas.models");
+const mesasModels = require("./mesa.models");
 
   
 module.exports = (sequelize, Sequelize) => {
