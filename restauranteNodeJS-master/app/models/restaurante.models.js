@@ -1,4 +1,4 @@
-
+const mesasModels = require("./mesas.models");
 
   
 module.exports = (sequelize, Sequelize) => {
@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        restauranteId: {
+        id: {
             type: Sequelize.BIGINT,
             primaryKey: true,
             autoIncrement: true

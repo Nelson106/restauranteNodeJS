@@ -29,7 +29,7 @@ exports.create = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    const id = req.params.restauranteId;
+    const id = req.params.id;
     Restaurante.findByPk(id)
         .then(data => {
             res.send(data);
@@ -58,7 +58,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    const id = req.params.restauranteId;
+    const id = req.params.id;
     
     validador = validarRestaurante(req)
     if (!validador.isValid) {
@@ -83,7 +83,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.restauranteId;
+    const id = req.params.id;
     
     Restaurante.findByPk(id)
         .then(restaurante => {
