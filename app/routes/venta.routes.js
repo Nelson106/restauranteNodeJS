@@ -5,5 +5,4 @@ module.exports = app => {
     router.get("/", venta.findAll);
     router.get("/:id", venta.findOne);
     app.use('/api/venta', router);
-
 };

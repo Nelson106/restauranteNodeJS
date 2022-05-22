@@ -34,7 +34,7 @@ exports.create = (req, res) => {
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Mesa.findByPk(id)
+    Mesa.findByPk(id, {include :[{model:modeloRestaurante}]})
         .then(data => {
             res.send(data);
         })

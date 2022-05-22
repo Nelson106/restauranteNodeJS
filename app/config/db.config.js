@@ -1,3 +1,6 @@
+
+db.config 
+
 module.exports = {
 
     HOST: "localhost",

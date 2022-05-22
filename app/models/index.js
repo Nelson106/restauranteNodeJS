@@ -4,7 +4,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 host: dbConfig.HOST,
 dialect: dbConfig.dialect,
 operatorsAliases: false,
-//port: dbConfig.PORT,
+port: dbConfig.PORT,
 pool: {
 max: dbConfig.pool.max,
 min: dbConfig.pool.min,
@@ -29,5 +29,6 @@ db.Restaurante.hasMany(db.Mesas,{foreignkey:"restauranteId"});
 
 // se añade una clave MesasId a la tabla Restaurante
 db.Mesas.belongsTo(db.Restaurante);
+
 
 module.exports = db;
