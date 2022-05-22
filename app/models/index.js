@@ -18,4 +18,16 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.Ventas = require("./venta.models.js")(sequelize,Sequelize);
 db.Restaurante = require("./restaurante.models.js")(sequelize, Sequelize);
+db.Mesas = require("./mesas.models.js")(sequelize, Sequelize);
+
+
+
+// un a a muchos 1 a N
+//Restaurante va a tener muchas mesas
+// se añade una clave RestauranteId a la tabla Mesas
+db.Restaurante.hasMany(db.Mesas,{as:"restaurante",foreignkey:"mesaId"});
+
+// se añade una clave MesasId a la tabla Restaurante
+db.Mesas.belongsTo(db.Restaurante,{as:"mesa"});
+
 module.exports = db;

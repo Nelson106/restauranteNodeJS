@@ -6,7 +6,10 @@ const cors = require("cors");
 
 const app = express();
 const db = require("./app/models");
+require('./app/models/relaciones'); 
 db.sequelize.sync();
+
+
 var corsOptions = {
 
     origin: "http://localhost:9091"
@@ -33,6 +36,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/venta.routes")(app);
 require("./app/routes/restaurante.routes")(app);
+
 // set port, listen for requests
 
 const PORT = process.env.PORT || 9090;
