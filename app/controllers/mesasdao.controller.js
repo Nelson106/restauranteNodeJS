@@ -1,36 +1,39 @@
 const db = require("../models");
-const Restaurante = db.Restaurante;
+const Mesa = db.Mesas;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.nombre) {
+    if (!req.body.nombreMesa) {
         res.status(400).send({
-            message: "Debe enviar el nombre del restaurante."
+            message: "Debe enviar el nombre de la mesa."
         });
         return;
     }
-    // crea un restaurante
-    const restaurante = {
-        nombre: req.body.nombre,
-        direccion: req.body.direccion
+    // crea una mesa
+    const mesa = {
+        nombreMesa: req.body.nombreMesa,
+        posicionX: req.body.posicionX,
+        posicionY: req.body.posicionY,
+        piso:req.body.piso,
+        capacidad:req.body.capacidad
     };
     // Guardamos a la base de datos
-    Restaurante.create(restaurante)
+    Mesa.create(mesa)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ha ocurrido un error al crear una restaurante."
+                    err.message || "Ha ocurrido un error al crear una mesa."
             });
         });
 };
 
 exports.findOne = (req, res) => {
-    const id = req.params.restauranteId;
-    Restaurante.findByPk(id)
+    const id = req.params.mesaId;
+    Mesa.findByPk(id)
         .then(data => {
             res.send(data);
         })
@@ -42,10 +45,10 @@ exports.findOne = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const nombre = req.query.nombre;
+    const nombre = req.query.nombreMesa;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
-    Restaurante.findAll({ where: condition })
+    Mesa.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -58,9 +61,9 @@ exports.findAll = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    const id = req.params.restauranteId;
+    const id = req.params.mesaId;
     
-    validador = validarRestaurante(req)
+    validador = validarMesa(req)
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
@@ -68,12 +71,15 @@ exports.update = (req, res) => {
         return;
     }
     
-    Restaurante.findByPk(id)
-        .then(restaurante => {
-            restaurante.nombre = req.body.nombre;
-            restaurante.direccion = req.body.direccion;
-            restaurante.save();
-            res.send(restaurante);
+    Mesa.findByPk(id)
+        .then(mesas => {
+            mesas.nombreMesa= req.body.nombreMesa;
+            mesas.posicionX= req.body.posicionX;
+            mesas.posicionY= req.body.posicionY;
+            mesas.piso=req.body.piso;
+            mesas.capacidad=req.body.capacidad;
+            mesas.save();
+            res.send(mesas);
         })
         .catch(err => {
             res.status(500).send({
@@ -83,11 +89,11 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.restauranteId;
+    const id = req.params.mesaId;
     
     Restaurante.findByPk(id)
-        .then(restaurante => {
-            restaurante.destroy();
+        .then(mesas => {
+            mesas.destroy();
             res.send();
         })
         .catch(err => {
@@ -98,18 +104,18 @@ exports.delete = (req, res) => {
 }
 
 function validarRestaurante(req){
-    if (!req.body.nombre) {
+    if (!req.body.nombreMesa) {
         return {
             isValid : false,
-            message : "Debe enviar el nombre del restaurante."
+            message : "Debe enviar el nombre de la mesa."
         };
     }
-    if (!req.body.direccion) {
+   /* if (!req.body.direccion) {
         return {
             isValid : false,
             message : "Debe enviar la direccion del restaurante."
         };
-    }
+    }*/
     return {
         isValid : true,
         message : ""

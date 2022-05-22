@@ -10,8 +10,11 @@ module.exports=(sequelize,Sequelize) =>{
         nombreMesa:{
             type: Sequelize.STRING
         },
-        posicion:{
-            type:Sequelize.STRING
+        posicionX:{
+            type:Sequelize.INTEGER
+        },
+        posicionY:{
+            type:Sequelize.INTEGER
         },
         piso:{
             type:Sequelize.INTEGER,
