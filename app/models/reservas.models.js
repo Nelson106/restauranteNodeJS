@@ -1,6 +1,6 @@
 module.exports=(sequelize,Sequelize) =>{
     const Reservas=sequelize.define("Reservas",{
-        ReservaId: {
+        id: {
             type: Sequelize.BIGINT,
             primaryKey: true,
             autoIncrement: true
