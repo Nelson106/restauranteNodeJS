@@ -17,8 +17,8 @@ module.exports=(sequelize,Sequelize) =>{
             allowNull: false
         },
 
-        rangoHora: {
-            type: Sequelize.STRING, //Foramto HH-HH,
+        horario: {
+            type: Sequelize.STRING, 
             allowNull: false
         }
 
