@@ -105,7 +105,7 @@ exports.delete = (req, res) => {
         });
 }
 
-function validarRestaurante(req){
+function validarMesa(req){
     if (!req.body.nombreMesa) {
         return {
             isValid : false,
