@@ -39,6 +39,9 @@ require("./app/routes/restaurante.routes")(app);
 require("./app/routes/mesas.routes")(app);
 
 
+
+require("./app/routes/cliente.routes")(app);
+
 // set port, listen for requests
 
 const PORT = process.env.PORT || 9090;
