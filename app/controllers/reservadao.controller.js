@@ -17,9 +17,9 @@ exports.create = (req, res) => {
         cantidad: req.body.cantidad,
         horario: req.body.horario,
         fecha: req.body.fecha,
-        restauranteId: req.body.restauranteId,
-        mesaId: req.body.mesaId,
-        clienteId: req.body.clienteId,
+        RestauranteRestauranteId: req.body.restauranteId,
+        MesaMesaId: req.body.mesaId,
+        ClienteId: req.body.clienteId,
     };
     
     /* SE GUARDA EN LA BASE DE DATOS */
@@ -52,7 +52,7 @@ exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
-    Reserva.findAll({ where: condition })
+    Reserva.findAll({ where: condition})
         .then(data => {
             res.send(data);
         })
