@@ -1,7 +1,8 @@
 const db = require("../models");
 const Reserva = db.Reservas;
 const Op = db.Sequelize.Op;
-
+const modeloRestaurante = db.Restaurante;
+const modeloMesa = db.Mesas;
 exports.create = (req, res) => {
     // Validate request
     validador = validarReserva(req)
@@ -37,7 +38,7 @@ exports.create = (req, res) => {
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Reserva.findByPk(id)
+    Reserva.findByPk(id, {include :[{model:modeloRestaurante}]})
         .then(data => {
             res.send(data);
         })
@@ -52,7 +53,7 @@ exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
-    Reserva.findAll({ where: condition})
+    Reserva.findAll({ where: condition, include :[{model:modeloRestaurante}] })
         .then(data => {
             res.send(data);
         })
