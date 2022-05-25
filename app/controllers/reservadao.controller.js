@@ -123,9 +123,9 @@ exports.update = (req, res) => {
             reserva.cantidad = req.body.cantidad;
             reserva.horario = req.body.horario;
             reserva.fecha = req.body.fecha;
-            reserva.restauranteId = req.body.restauranteId;
-            reserva.mesaId = req.body.mesaId;
-            reserva.clienteId = req.body.clienteId;
+            reserva.RestauranteRestauranteId = req.body.restauranteId;
+            reserva.MesaMesaId = req.body.mesaId;
+            reserva.ClienteId = req.body.clienteId;
             reserva.save();
             res.send(reserva);
         })
