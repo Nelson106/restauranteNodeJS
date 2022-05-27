@@ -19,8 +19,8 @@ db.sequelize = sequelize;
 db.Ventas = require("./venta.models.js")(sequelize,Sequelize);
 db.Restaurante = require("./restaurante.models.js")(sequelize, Sequelize);
 db.Mesas = require("./mesas.models.js")(sequelize, Sequelize);
-
-
+db.Cliente = require("./cliente.models.js")(sequelize, Sequelize);
+db.Reservas = require("./reservas.models.js")(sequelize, Sequelize);
 
 // un a a muchos 1 a N
 //Restaurante va a tener muchas mesas
@@ -30,5 +30,8 @@ db.Restaurante.hasMany(db.Mesas,{foreignkey:"restauranteId"});
 // se añade una clave MesasId a la tabla Restaurante
 db.Mesas.belongsTo(db.Restaurante);
 
-
+//Prueba de relaciones con reserva
+db.Reservas.belongsTo(db.Restaurante, {foreignkey: "restauranteId"});
+db.Reservas.belongsTo(db.Mesas, {foreignkey: "mesaId"});
+db.Reservas.belongsTo(db.Cliente, {foreignkey: "id"});
 module.exports = db;

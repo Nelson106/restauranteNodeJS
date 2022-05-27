@@ -30,14 +30,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
 
-    res.json({ message: "Bienvenido Node backend 2020" });
+    res.json({ message: "Bienvenido Node backend 2022" });
 
 });
 
 require("./app/routes/venta.routes")(app);
 require("./app/routes/restaurante.routes")(app);
 require("./app/routes/mesas.routes")(app);
-
+require("./app/routes/cliente.routes")(app);
+require("./app/routes/reservas.routes")(app);
 
 // set port, listen for requests
 

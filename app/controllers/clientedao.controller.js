@@ -1,47 +1,45 @@
 const db = require("../models");
-const Mesa = db.Mesa;
+const Cliente = db.Cliente;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
     // Validate request
-    validador = validarMesa(req)
+    validador = validarCliente(req);
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
     }
-    // crea un mesa
-    // si no se agrega un numero de piso por defecto es 1er piso
-    const mesa = {
+    // crea un cliente
+    const cliente = {
+        id: req.body.id,
         nombre: req.body.nombre,
-        idDeRestaurante: req.body.idDeRestaurante,
-        posicionX: req.body.posicionX,
-        posicionY: req.body.posicionY,
-        numeroDePiso: req.body.numeroDePiso != null ? req.body.numeroDePiso : 1
+        apellido: req.body.apellido,
+        cedula: req.body.cedula
     };
     // Guardamos a la base de datos
-    Mesa.create(mesa)
+    Cliente.create(cliente)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ha ocurrido un error al crear una restaurante."
+                    err.message || "Ha ocurrido un error al crear un cliente."
             });
         });
 };
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Mesa.findByPk(id)
+    Cliente.findByPk(id)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener restaurante con id= " + id
+                message: "Error al obtener cliente con id= " + id
             });
         });
 };
@@ -50,14 +48,14 @@ exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
-    Mesa.findAll({ where: condition })
+    Cliente.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ocurrio un error al obtener las mesas."
+                    err.message || "Ocurrio un error al obtener las clientes."
             });
         });
 };
@@ -65,7 +63,7 @@ exports.findAll = (req, res) => {
 exports.update = (req, res) => {
     var id = req.params.id;
 
-    validador = validarMesa(req)
+    validador = validarCliente(req);
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
@@ -73,61 +71,53 @@ exports.update = (req, res) => {
         return;
     }
 
-    Mesa.findByPk(id)
-        .then(mesa => {
-            mesa.nombre = req.body.nombre;
-            mesa.idDeRestaurante = req.body.idDeRestaurante,
-            mesa.posicionX = req.body.posicionX,
-            mesa.posicionY = req.body.posicionY,
-            mesa.numeroDePiso = req.body.numeroDePiso,
-            mesa.save();
-            res.send(mesa);
+    Cliente.findByPk(id)
+        .then(cliente => {
+            cliente.nombre = req.body.nombre;
+            cliente.apellido = req.body.apellido,
+            cliente.cedula = req.body.cedula;
+            cliente.save();
+            res.send(cliente);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener mesa con id= " + id
+                message: "Error al obtener cliente con id= " + id
             });
         });
-}
+};
 
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Mesa.findByPk(id)
-        .then(mesa => {
-            mesa.destroy();
+    Cliente.findByPk(id)
+        .then(cliente => {
+            cliente.destroy();
             res.send();
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener mesa con id= " + id
+                message: "Error al obtener cliente con id= " + id
             });
         });
-}
+};
 
-function validarMesa(req) {
+function validarCliente(req) {
     if (!req.body.nombre) {
         return {
             isValid: false,
-            message: "Debe enviar el nombre de la mesa."
+            message: "Debe enviar el nombre de la cliente."
         };
     }
-    if (!req.body.idDeRestaurante) {
+    if (!req.body.apellido) {
         return {
             isValid: false,
-            message: "Debe enviar el id del restaurante."
+            message: "Debe enviar el nombre."
         };
     }
-    if (!req.body.posicionX) {
+    if (!req.body.cedula) {
         return {
             isValid: false,
-            message: "Debe enviar la posicion x del restaurante."
-        };
-    }
-    if (!req.body.posicionY) {
-        return {
-            isValid: false,
-            message: "Debe enviar la posicion y del restaurante."
+            message: "Debe enviar la cedula."
         };
     }
     return {
