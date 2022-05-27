@@ -10,14 +10,15 @@ const db = require("./app/models");
 db.sequelize.sync();
 
 
-var corsOptions = {
+/*var corsOptions = {
 
-    origin: "http://localhost:9091"
+    origin: "http://localhost:9090"
 
-};
+};*/
 
-app.use(cors(corsOptions));
-
+//app.use(cors(corsOptions));
+app.use(cors());
+app.options('*', cors());
 // parse requests of content-type - application/json
 
 app.use(bodyParser.json());
