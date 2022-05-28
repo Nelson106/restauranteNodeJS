@@ -20,7 +20,8 @@ const CompListarMesa=() =>{
 
 
     const deleteMesas = async(id) =>{
-        axios.delete('${URI}${id}')
+        
+       await axios.delete(URI+'/'+id)
         getMesas()
     }
 
