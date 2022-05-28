@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
 
     res.json({ message: "Bienvenido Node backend 2022" });
+    
 
 });
 
