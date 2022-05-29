@@ -6,25 +6,35 @@ const URI='http://localhost:9090/api/reservas'
 const URICLIENTE='http://localhost:9090/api/cliente'
 const URIMESA='http://localhost:9090/api/mesas'
 const URIRESTAURANTE='http://localhost:9090/api/restaurantes'
-
+    let horario1
+    let horario2
+    let horario3
+    let horario4
+    let horario5
+    let horario6
+    let horario7
 const CompCrearReserva=() =>{
     const [restaurantes,setRestaurantes]=useState([])
     const [restauranteElegidoId,setRestauranteElegido]=useState([])
     const [fecha,setFecha]=useState([])
-    const [horario1,setHorario1]=useState([])
+   /* const [horario1,setHorario1]=useState([])
     const [horario2,setHorario2]=useState([])
     const [horario3,setHorario3]=useState([])
     const [horario4,setHorario4]=useState([])
     const [horario5,setHorario5]=useState([])
     const [horario6,setHorario6]=useState([])
-    const [horario7,setHorario7]=useState([])
-    useEffect(() =>{
-        getRestaurantes()
-    },[])
+    const [horario7,setHorario7]=useState([])*/
+    
+
+
 
     const [mesas,setMesas]=useState([])
     const [mesaId,setMesaId]=useState([])
     const [capacidad,setCapacidad]=useState([])
+    useEffect(() =>{
+        getRestaurantes()
+    },[])
+
     useEffect(() =>{
         getMesas()
     },[])
@@ -36,7 +46,42 @@ const CompCrearReserva=() =>{
        const res = await axios.get(URIRESTAURANTE)
        setRestaurantes(res.data)
     }
-  
+    const handleChexbox1 = (e) => {
+        
+         horario1=e.target.checked
+         console.log("adsada",horario1)
+       
+      }
+      const handleChexbox2 = (e) => {
+        
+         horario2=e.target.checked
+       
+      }
+      const handleChexbox3 = (e) => {
+        
+         horario3=e.target.checked
+       
+      }
+      const handleChexbox4 = (e) => {
+        
+        horario4=e.target.checked
+       
+      }
+      const handleChexbox5 = (e) => {
+        
+         horario5=e.target.checked
+       
+      }
+      const handleChexbox6 = (e) => {
+        
+         horario6=e.target.checked
+       
+      }
+      const handleChexbox7 = (e) => {
+        
+         horario7=e.target.checked
+       
+      }
     //procedimiento para mostrar todas las mesas
 
     const getMesas = async() =>{
@@ -47,42 +92,43 @@ const CompCrearReserva=() =>{
         e.preventDefault()
         const res = await axios.get(URIMESA+'/'+mesaId)
 
-        console.log("mesa elegida",res.data.capacidad)
+        console.log("mesa elegida",horario1)
+        
         //setMesas(res.data)
-        if(horario1!=""){
+        if(horario1){
             console.log("elegido1111",horario1)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario1,mesaId:mesaId,cantidad:res.data.capacidad})
+                horario:"12-13",mesaId:mesaId,cantidad:res.data.capacidad})
         }
-        if(horario2!=""){
+        if(horario2){
             console.log("elegido2",horario2)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario2})
+                horario:'13-14',mesaId:mesaId,cantidad:res.data.capacidad})
         }
-        if(horario3!=""){
+        if(horario3){
             console.log("elegido3",horario3)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario3})
+                horario:'14-15',mesaId:mesaId,cantidad:res.data.capacidad})
         }
-        if(horario4!=""){
+        if(horario4){
             console.log("elegido4",horario4)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario4})
+                horario:'19-20',mesaId:mesaId,cantidad:res.data.capacidad})
         }
-        if(horario5!=""){
+        if(horario5){
             console.log("elegido5",horario5)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario5})
+                horario:'20-21',mesaId:mesaId,cantidad:res.data.capacidad})
         }
-        if(horario6!=""){
+        if(horario6){
             console.log("elegido6",horario6)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario6})
+                horario:'21-22',mesaId:mesaId,cantidad:res.data.capacidad})
         }
-        if(horario7!=""){
+        if(horario7){
             console.log("elegido7",horario7)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario7})
+                horario:'22-23',mesaId:mesaId,cantidad:res.data.capacidad})
         }
        
         navigate('/reservas')
@@ -138,57 +184,45 @@ const CompCrearReserva=() =>{
                         name="hora1"
                         type="checkbox"
                         
-                        value="12-13"
-                        onChange={(e)=> setHorario1(e.target.value)}
+                        onChange={handleChexbox1}
+                        
                         
                         
                     />
                     <label className="hora1" >13-14</label>
                     <input
-                        id="hora1"
-                        value="13-14"
-                        onChange={(e)=> setHorario2(e.target.value)}
+                        onChange={handleChexbox2}
                         type="checkbox"
                         
                     />
                     <label className="hora1" >14-15</label>
                     <input
-                        id="hora1"
-                        value="14-15"
-                        onChange={(e)=> setHorario3(e.target.value)}
+                        onChange={handleChexbox3}
                         type="checkbox"
                         
                     />
                    
                      <label className="hora1" >19-20</label>
                     <input
-                        id="hora1"
-                        value="19-20"
-                        onChange={(e)=> setHorario4(e.target.value)}
+                        onChange={handleChexbox4}
                         type="checkbox"
                         
                     />
                      <label className="hora1" >20-21</label>
                     <input
-                        id="hora1"
-                        value="20-21"
-                        onChange={(e)=> setHorario5(e.target.value)}
+                        onChange={handleChexbox5}
                         type="checkbox"
                         
                     />
                      <label className="hora1" >21-22</label>
                     <input
-                        id="hora1"
-                        value="21-22"
-                        onChange={(e)=> setHorario6(e.target.value)}
+                        onChange={handleChexbox6}
                         type="checkbox"
                         
                     />
                      <label className="hora1" >22-23</label>
                     <input
-                        id="hora1"
-                        value="22-23"
-                        onChange={(e)=> setHorario7(e.target.value)}
+                        onChange={handleChexbox7}
                         type="checkbox"
                         
                     />
