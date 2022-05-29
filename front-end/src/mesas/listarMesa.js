@@ -42,7 +42,7 @@ const CompListarMesa=() =>{
                                 <tr key={mesa.mesaId}>
                                     <td>{mesa.nombreMesa}</td>
                                     <td>
-                                        <Link to={'/edit/${mesa.mesaId}'} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
+                                        <Link to={'/update/' + mesa.mesaId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
                                         <button onClick={()=>deleteMesas(mesa.mesaId)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
                                     </td>
                                 </tr>

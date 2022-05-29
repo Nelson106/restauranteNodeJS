@@ -6,6 +6,7 @@ import CompCrearMesa from './mesas/crearMesa';
 import CompListarRestaurantes from './restaurantes/listarRestaurante';
 
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
+import CompEditarMesa from './mesas/actualizarMesa';
 
 //import { Router } from 'express';
 function App() {
@@ -20,8 +21,7 @@ function App() {
             <Routes>
               <Route path='/' element={<CompListarMesa />} />
               <Route path='/create' element={ <CompCrearMesa /> } />
-              <Route path='/restaurantes' element={<CompListarRestaurantes />} />
-              
+              <Route path='/update/:mesaId' element={ <CompEditarMesa /> } />
             </Routes>
         </BrowserRouter>
      
