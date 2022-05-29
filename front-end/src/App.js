@@ -2,9 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import CompListarMesa from './mesas/listarMesa';
 import CompCrearMesa from './mesas/crearMesa';
-import { BrowserRouter,Route, Routes } from 'react-router-dom';
+import CompListarReservas from './reserva/listarReserva';
 import CompEditarMesa from './mesas/actualizarMesa';
+ 
 import CompCrearReserva from './reserva/crearReserva';
+
+import { BrowserRouter,Route, Routes } from 'react-router-dom';
+
 
 //import { Router } from 'express';
 function App() {
@@ -20,7 +24,11 @@ function App() {
               <Route path='/' element={<CompListarMesa />} />
               <Route path='/create' element={ <CompCrearMesa /> } />
               <Route path='/update/:mesaId' element={ <CompEditarMesa /> } />
+
               <Route path='/reserva' element={ <CompCrearReserva /> } />
+
+              <Route path='/reservas' element={<CompListarReservas />} />
+
             </Routes>
         </BrowserRouter>
      

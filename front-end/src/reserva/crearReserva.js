@@ -10,6 +10,7 @@ const URIRESTAURANTE='http://localhost:9090/api/restaurantes'
 const CompCrearReserva=() =>{
     const [restaurantes,setRestaurantes]=useState([])
     const [restauranteElegidoId,setRestauranteElegido]=useState([])
+    const [fecha,setFecha]=useState([])
     useEffect(() =>{
         getRestaurantes()
     },[])
@@ -70,7 +71,15 @@ const CompCrearReserva=() =>{
                        
                         
                     </table>
-                    <input  type="Date"></input>
+                    <input  
+                        value={fecha} 
+                        onChange={(e)=> setFecha(e.target.value)}
+                        type="Date"
+
+                    />
+
+                    
+                    
                 </div>
             </div>
         </div>
