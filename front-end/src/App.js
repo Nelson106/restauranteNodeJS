@@ -3,7 +3,8 @@ import './App.css';
 import CompListarMesa from './mesas/listarMesa';
 import CompCrearMesa from './mesas/crearMesa';
 
-import CompListarRestaurantes from './restaurantes/listarRestaurante';
+import CompListarRestaurantes from './restaurante/listarRestaurante';
+import CompCrearRestaurante from './restaurante/crearRestaurante';
 
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
 import CompEditarMesa from './mesas/actualizarMesa';
@@ -22,6 +23,9 @@ function App() {
               <Route path='/' element={<CompListarMesa />} />
               <Route path='/create' element={ <CompCrearMesa /> } />
               <Route path='/update/:mesaId' element={ <CompEditarMesa /> } />
+
+              <Route path='/restaurante' element={ <CompListarRestaurantes/> } />
+              <Route path='/restaurante/crear' element={ <CompCrearRestaurante/> } />
             </Routes>
         </BrowserRouter>
      
