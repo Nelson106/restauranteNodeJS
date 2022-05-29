@@ -19,7 +19,7 @@ const CompEditarMesa = () =>{
             nombreMesa:title
         })
 
-        navigate('/')
+        navigate('/mesas/')
     }
 
         useEffect( () =>{

@@ -6,15 +6,18 @@ const URI='http://localhost:9090/api/mesas'
 
 const CompCrearMesa = () => {
     const [title,setTitle]= useState('')
-    const [content,setContent]= useState('')
+    const [floor,setFloor]= useState('')
+    const [px,setPx]= useState('')
+    const [py,setPy]= useState('')
+    const [capacity,setCapacity]= useState('')
     const navigate=useNavigate()
 
     //procedimient guardar
     const store = async (e) =>{
         e.preventDefault()
         console.log("title",title)
-        await axios.post(URI,{nombreMesa:title})
-        navigate('/')
+        await axios.post(URI,{nombreMesa:title, piso:floor,posicionX:px,posicionY:py,capacidad:capacity})
+        navigate('/mesas')
     }
     return (
         <div>
@@ -25,6 +28,42 @@ const CompCrearMesa = () => {
                     <input 
                         value={title} 
                         onChange={(e)=> setTitle(e.target.value)}
+                        type="text"
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Piso</label>
+                    <input 
+                        value={floor} 
+                        onChange={(e)=> setFloor(e.target.value)}
+                        type="text"
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Posicion X</label>
+                    <input 
+                        value={px} 
+                        onChange={(e)=> setPx(e.target.value)}
+                        type="text"
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Posicion Y</label>
+                    <input 
+                        value={py} 
+                        onChange={(e)=> setPy(e.target.value)}
+                        type="text"
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Capacidad</label>
+                    <input 
+                        value={capacity} 
+                        onChange={(e)=> setCapacity(e.target.value)}
                         type="text"
                         className="form-control"
                     />
