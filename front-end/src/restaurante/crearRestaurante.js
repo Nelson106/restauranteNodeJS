@@ -6,13 +6,13 @@ const URI='http://localhost:9090/api/restaurantes'
 
 const CompCrearRestaurante = () => {
     const [title,setTitle]= useState('')
-    const [content,setContent]= useState('')
+    const [address,setAddress]= useState('')
     const navigate=useNavigate()
 
     //procedimient guardar
     const store = async (e) =>{
         e.preventDefault()
-        await axios.post(URI,{nombre:title})
+        await axios.post(URI,{nombre:title, direccion:address})
         navigate('/restaurante')
     }
     return (
@@ -27,7 +27,15 @@ const CompCrearRestaurante = () => {
                         type="text"
                         className="form-control"
                     />
+                </div>
+                <div className="mb-3">
                     <label className="form-label">Direccion</label>
+                    <input 
+                        value={address} 
+                        onChange={(e)=> setAddress(e.target.value)}
+                        type="text"
+                        className="form-control"
+                    />
                     
                 </div>
                 <button type="submit" className="btn btn-primary">Guardar</button>
