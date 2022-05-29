@@ -20,13 +20,15 @@ const CompCrearRestaurante = () => {
            <h3>Crear restaurante</h3>
            <form onSubmit={store}>   
                 <div className="mb-3">
-                    <label className="form-label">Nombre</label>
+                    <label className="form-label">Nombre Restaurante</label>
                     <input 
                         value={title} 
                         onChange={(e)=> setTitle(e.target.value)}
                         type="text"
                         className="form-control"
                     />
+                    <label className="form-label">Direccion</label>
+                    
                 </div>
                 <button type="submit" className="btn btn-primary">Guardar</button>
            </form>

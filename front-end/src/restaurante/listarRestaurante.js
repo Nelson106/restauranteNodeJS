@@ -33,15 +33,19 @@ const CompListarRestaurantes=() =>{
                         <thead className="table-primary">
                             <tr>
                                 <th>Nombre</th>
-                                
+                                <th>ID</th>
+                                <th>Direccion</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
                             {Restaurantes.map ((Restaurantes)=>(
                                 <tr key={Restaurantes.restauranteId}>
                                     <td>{Restaurantes.nombre}</td>
+                                    <td>{Restaurantes.restauranteId}</td>
+                                    <td>{Restaurantes.direccion}</td>
                                     <td>
-                                        <Link to={'/update/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
+                                        <Link to={'update/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
                                         <button onClick={()=>deleteRestaurantes(Restaurantes.restauranteId)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
                                     </td>
                                 </tr>

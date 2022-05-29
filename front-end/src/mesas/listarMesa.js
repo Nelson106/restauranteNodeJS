@@ -27,9 +27,11 @@ const CompListarMesa=() =>{
 
     return (
         <div className="container">
+            
             <div className="row">
                 <div className="col">
-                    <Link to="/create" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-plus"></i></Link>
+                    <Link to="/restaurante" className='btn btn-primary mt-2 mb-2'>Restaurantes</Link>
+                    <Link to="/create" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
