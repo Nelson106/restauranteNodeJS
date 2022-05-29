@@ -8,18 +8,18 @@ module.exports=(sequelize,Sequelize) =>{
 
         fecha: {
             type: Sequelize.DATE,
-           //allowNull:false
+            allowNull:false
         },
 
         cantidad: {
             type: Sequelize.BIGINT,
             defaultValue: 1,
-            //allowNull: false
+            allowNull: false
         },
 
         horario: {
             type: Sequelize.STRING, 
-            //allowNull: false
+            allowNull: false
         }
 
     });
