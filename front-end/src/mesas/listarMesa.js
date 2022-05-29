@@ -18,7 +18,6 @@ const CompListarMesa=() =>{
        setMesas(res.data)
     }
 
-
     const deleteMesas = async(id) =>{
         
        await axios.delete(URI+'/'+id)
@@ -26,25 +25,30 @@ const CompListarMesa=() =>{
     }
 
     return (
+        
         <div className="container">
-            
             <div className="row">
                 <div className="col">
-                    <Link to="/restaurante" className='btn btn-primary mt-2 mb-2'>Restaurantes</Link>
-                    <Link to="/create" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
+                    <Link to="/mesas/crear" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
+                                <th>ID</th>
                                 <th>Nombre</th>
-                                
+                                <th>Piso</th>
+                                <th>Capacidad</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {mesas.map ((mesa)=>(
                                 <tr key={mesa.mesaId}>
+                                    <td>{mesa.mesaId}</td>
                                     <td>{mesa.nombreMesa}</td>
+                                    <td>{mesa.piso}</td>
+                                    <td>{mesa.capacidad}</td>
                                     <td>
-                                        <Link to={'/update/' + mesa.mesaId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
+                                        <Link to={'update/' + mesa.mesaId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
                                         <button onClick={()=>deleteMesas(mesa.mesaId)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
                                     </td>
                                 </tr>

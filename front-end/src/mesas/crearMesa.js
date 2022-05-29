@@ -14,7 +14,7 @@ const CompCrearMesa = () => {
         e.preventDefault()
         console.log("title",title)
         await axios.post(URI,{nombreMesa:title})
-        navigate('/')
+        navigate('/mesas')
     }
     return (
         <div>
