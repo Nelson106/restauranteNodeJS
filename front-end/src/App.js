@@ -8,7 +8,13 @@ import CompCrearRestaurante from './restaurante/crearRestaurante';
 import CompEditarRestaurante from './restaurante/actualizarRestaurante';
 
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
+import CompListarReservas from './reserva/listarReserva';
 import CompEditarMesa from './mesas/actualizarMesa';
+ 
+import CompCrearReserva from './reserva/crearReserva';
+
+import { BrowserRouter,Route, Routes } from 'react-router-dom';
+
 
 //import { Router } from 'express';
 function App() {
@@ -28,6 +34,10 @@ function App() {
               <Route path='/restaurante' element={ <CompListarRestaurantes/> }  />
               <Route path='/restaurante/crear' element={ <CompCrearRestaurante/> } />
               <Route path='/restaurante/update/:restauranteId' element={ <CompEditarRestaurante/> } />
+              <Route path='/reserva' element={ <CompCrearReserva /> } />
+
+              <Route path='/reservas' element={<CompListarReservas />} />
+
             </Routes>
         </BrowserRouter>
      
