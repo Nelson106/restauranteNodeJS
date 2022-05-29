@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 const URI='http://localhost:9090/api/reservas'
 const URICLIENTE='http://localhost:9090/api/cliente'
-const URIMESA='http://localhost:9090/api/mesass'
+const URIMESA='http://localhost:9090/api/mesas'
 const URIRESTAURANTE='http://localhost:9090/api/restaurantes'
 
 const CompCrearReserva=() =>{
@@ -21,6 +21,14 @@ const CompCrearReserva=() =>{
     useEffect(() =>{
         getRestaurantes()
     },[])
+
+    const [mesas,setMesas]=useState([])
+    const [mesaId,setMesaId]=useState([])
+    const [capacidad,setCapacidad]=useState([])
+    useEffect(() =>{
+        getMesas()
+    },[])
+
     const navigate=useNavigate()
     //procedimiento para mostrar todas las mesas
 
@@ -29,13 +37,22 @@ const CompCrearReserva=() =>{
        setRestaurantes(res.data)
     }
   
+    //procedimiento para mostrar todas las mesas
+
+    const getMesas = async() =>{
+        const res = await axios.get(URIMESA)
+        setMesas(res.data)
+     }
     const guardarReserva = async (e) =>{
         e.preventDefault()
+        const res = await axios.get(URIMESA+'/'+mesaId)
 
+        console.log("mesa elegida",res.data.capacidad)
+        //setMesas(res.data)
         if(horario1!=""){
             console.log("elegido1111",horario1)
             await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
-                horario:horario1})
+                horario:horario1,mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario2!=""){
             console.log("elegido2",horario2)
@@ -68,15 +85,10 @@ const CompCrearReserva=() =>{
                 horario:horario7})
         }
        
-        navigate('/reserva')
+        navigate('/reservas')
     }
 
-    /*const deleteMesas = async(id) =>{
-        
-       await axios.delete(URI+'/'+id)
-        getMesas()
-    }
-*/
+    
     return (
         <form onSubmit={guardarReserva}>   
         <div className="container">
@@ -183,6 +195,46 @@ const CompCrearReserva=() =>{
                 </div>
             </div>
         </div>
+        <div className="container">
+            <div className="row">
+                <div className="col">
+                    <Link to="/mesas/crear" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
+                    <th>Lista de Mesas</th>
+                    <table className="table">
+                        <thead className="table-primary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Piso</th>
+                                <th>Capacidad</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mesas.map ((mesa)=>(
+                                <tr key={mesa.mesaId}>
+                                    <td>{mesa.mesaId}</td>
+                                    <td>{mesa.nombreMesa}</td>
+                                    <td>{mesa.piso}</td>
+                                    <td>{mesa.capacidad}</td>
+                                    <td>
+                                            <input
+                                                
+                                                value={mesa.mesaId}
+                                                onChange={(e)=> setMesaId(e.target.value)}
+                                                type="checkbox"
+                                                
+                                            />
+                                       
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <button type="submit" className="btn btn-primary">Guardar</button>
         </form>
     )
