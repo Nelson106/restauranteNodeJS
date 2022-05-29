@@ -26,14 +26,16 @@ const CompListarRestaurantes=() =>{
 
     return (
         <div className="container">
+
             <div className="row">
                 <div className="col">
                     <Link to="/restaurante/crear" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-plus"></i></Link>
+                    <th>Lista de Restaurantes</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
-                                <th>Nombre</th>
                                 <th>ID</th>
+                                <th>Nombre</th>
                                 <th>Direccion</th>
                                 <th>Accion</th>
                             </tr>
@@ -41,8 +43,8 @@ const CompListarRestaurantes=() =>{
                         <tbody>
                             {Restaurantes.map ((Restaurantes)=>(
                                 <tr key={Restaurantes.restauranteId}>
-                                    <td>{Restaurantes.nombre}</td>
                                     <td>{Restaurantes.restauranteId}</td>
+                                    <td>{Restaurantes.nombre}</td>
                                     <td>{Restaurantes.direccion}</td>
                                     <td>
                                         <Link to={'update/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>

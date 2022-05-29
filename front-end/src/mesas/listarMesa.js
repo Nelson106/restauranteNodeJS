@@ -30,6 +30,7 @@ const CompListarMesa=() =>{
             <div className="row">
                 <div className="col">
                     <Link to="/mesas/crear" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
+                    <th>Lista de Mesas</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
