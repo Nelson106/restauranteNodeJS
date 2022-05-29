@@ -13,8 +13,6 @@ import CompEditarMesa from './mesas/actualizarMesa';
  
 import CompCrearReserva from './reserva/crearReserva';
 
-import { BrowserRouter,Route, Routes } from 'react-router-dom';
-
 
 //import { Router } from 'express';
 function App() {
