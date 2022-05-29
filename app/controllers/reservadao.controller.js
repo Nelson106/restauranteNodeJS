@@ -5,14 +5,14 @@ const modeloRestaurante = db.Restaurante;
 const modeloMesa = db.Mesas;
 exports.create = (req, res) => {
     // Validate request
-    /*validador = validarReserva(req)
+    validador = validarReserva(req)
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
     }
-*/
+
     /* CREA UNA RESERVA */
     const reserva = {
         cantidad: req.body.cantidad,
@@ -182,13 +182,13 @@ function validarReserva(req){
             message : "Debe enviar el id de la mesa de la reserva."
         };
     }
-    if (!req.body.clienteId) {
+   /* if (!req.body.clienteId) {
         return {
             isValid : false,
             message : "Debe enviar el id del cliente de la reserva."
         };
     }
-
+*/
     return {
         isValid : true,
         message : ""

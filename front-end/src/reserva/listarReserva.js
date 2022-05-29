@@ -36,6 +36,7 @@ const CompListarReservas=() =>{
                                 <th>Id</th>
                                 <th>Restaurante</th>
                                 <th>Mesa</th>
+                                <th>Cantidad</th>
                                 <th>Cliente</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
@@ -47,6 +48,7 @@ const CompListarReservas=() =>{
                                     <td>{reserva.id}</td>
                                     <td>{reserva.Restaurante.nombre}</td>
                                     <td>{reserva.MesaMesaId}</td>
+                                    <td>{reserva.cantidad}</td>
                                     <td>{reserva.ClienteId}</td>
                                     <td placeholder="dd-mm-yyyy">{reserva.fecha}</td>
                                     <td>{reserva.horario}</td>

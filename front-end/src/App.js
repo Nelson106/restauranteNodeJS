@@ -24,11 +24,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <a class="btn btn-secondary" href="/cliente" role="button">Clientes</a> 
-          <a class="btn btn-secondary" href="/reservas" role="button">Reservas</a>
-          <a class="btn btn-secondary" href="/restaurante" role="button">Restaurantes</a>
-          <a class="btn btn-secondary" href="/mesas" role="button">Mesas</a>  
+        <div className="btn-group" role="group" aria-label="Basic example">
+          <a className="btn btn-secondary" href="/cliente" role="button">Clientes</a> 
+          <a className="btn btn-secondary" href="/reservas" role="button">Reservas</a>
+          <a className="btn btn-secondary" href="/restaurante" role="button">Restaurantes</a>
+          <a className="btn btn-secondary" href="/mesas" role="button">Mesas</a>  
+          <a className="btn btn-secondary" href="/crearReserva" role="button">Crear Reserva</a>  
         </div>
         
       </header>
@@ -42,7 +43,7 @@ function App() {
               <Route path='/restaurante' element={ <CompListarRestaurantes/> }  />
               <Route path='/restaurante/crear' element={ <CompCrearRestaurante/> } />
               <Route path='/restaurante/update/:restauranteId' element={ <CompEditarRestaurante/> } />
-              <Route path='/reserva' element={ <CompCrearReserva /> } />
+              <Route path='/crearReserva' element={ <CompCrearReserva /> } />
               <Route path='/reservas' element={<CompListarReservas />} />
               <Route path='/cliente' element={<CompListarClientes />} />
               <Route path='/cliente/crear' element={<CompCrearCliente />} />
