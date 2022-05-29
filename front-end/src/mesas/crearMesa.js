@@ -12,6 +12,7 @@ const CompCrearMesa = () => {
     //procedimient guardar
     const store = async (e) =>{
         e.preventDefault()
+        console.log("title",title)
         await axios.post(URI,{nombreMesa:title})
         navigate('/')
     }
