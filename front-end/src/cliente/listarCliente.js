@@ -38,6 +38,7 @@ const CompListarClientes=() =>{
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Cedula</th>
+                                <th>Reservas</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
@@ -49,8 +50,11 @@ const CompListarClientes=() =>{
                                     <td>{Cliente.apellido}</td>
                                     <td>{Cliente.cedula}</td>
                                     <td>
+                                        <Link to={'reservas/' + Cliente.id} className='btn btn-info'><i className="fa-solid fa-file-lines"></i> Ver reservas</Link>
+                                    </td>
+                                    <td>
                                         <Link to={'update/' + Cliente.id} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
-                                        <button onClick={()=>deleteCliente(Cliente.id)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
+                                        
                                     </td>
                                 </tr>
                             ))}
