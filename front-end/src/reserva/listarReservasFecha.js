@@ -16,18 +16,9 @@ const CompListarReservasF=() =>{
     //procedimiento para mostrar todas las Reservas
 
     const getReservas = async() =>{
-       const res = await axios.get(URI)
-        var dat = res.data;
-        var d = []
-        var i;
-        console.log(dat[0].fecha)
-        for(i = 0; i < dat.lenght ; i++){
-            if(dat[i].fecha == fecha){
-                d.push(dat[i])
-            }
-        }
-        setReservas(d)       
-    }
+        const res = await axios.get(URI)
+        setReservas(res.data)       
+     }
 
 
     const deleteReservas = async(id) =>{

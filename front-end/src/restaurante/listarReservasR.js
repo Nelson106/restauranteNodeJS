@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import {useParams ,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const URI='http://localhost:9090/api/reservas/'
 
@@ -66,6 +67,7 @@ const CompRestauranteReservas = () =>{
                             ))}
                         </tbody>
                     </table>
+                    <Link to={'/restaurante'} className='btn btn-info'><i class="fa-solid fa-backward"> </i>Atras</Link>
                 </div>
             </div>
         </div>
