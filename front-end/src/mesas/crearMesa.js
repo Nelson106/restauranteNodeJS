@@ -42,7 +42,7 @@ const CompCrearMesa = () => {
     return (
         <div>
            <h3>Crear mesa</h3>
-           <form onSubmit={store}>   
+           <form  onSubmit={store}>   
                 <div className="mb-3">
                     <label className="form-label">Nombre</label>
                     <input 
