@@ -29,7 +29,7 @@ const CompListarRestaurantes=() =>{
 
             <div className="row">
                 <div className="col">
-                    <Link to="/restaurante/crear" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-plus"></i></Link>
+                    <Link to="/restaurante/crear" className='btn btn-primary mt-2 mb-2'>Registrar Restaurante <i className="fa-solid fa-utensils"></i></Link>
                     <th>Lista de Restaurantes</th>
                     <table className="table">
                         <thead className="table-primary">
@@ -48,7 +48,7 @@ const CompListarRestaurantes=() =>{
                                     <td>{Restaurantes.nombre}</td>
                                     <td>{Restaurantes.direccion}</td>
                                     <td>
-                                        <Link to={'reservas/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-file-lines"></i></Link>
+                                        <Link to={'reservas/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-file-lines"></i>  Ver reservas </Link>
                                     </td>
                                     <td>
                                         <Link to={'update/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>

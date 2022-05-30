@@ -29,7 +29,7 @@ const CompListarClientes=() =>{
 
             <div className="row">
                 <div className="col">
-                    <Link to="/cliente/crear" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-plus"></i></Link>
+                    <Link to="/cliente/crear" className='btn btn-primary mt-2 mb-2'><i class="fa-solid fa-circle-user"></i>  Crear cliente</Link>
                     <th>Lista de Clientes</th>
                     <table className="table">
                         <thead className="table-primary">
@@ -39,7 +39,6 @@ const CompListarClientes=() =>{
                                 <th>Apellido</th>
                                 <th>Cedula</th>
                                 <th>Reservas</th>
-                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,10 +50,6 @@ const CompListarClientes=() =>{
                                     <td>{Cliente.cedula}</td>
                                     <td>
                                         <Link to={'reservas/' + Cliente.id} className='btn btn-info'><i className="fa-solid fa-file-lines"></i> Ver reservas</Link>
-                                    </td>
-                                    <td>
-                                        <Link to={'update/' + Cliente.id} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
-                                        
                                     </td>
                                 </tr>
                             ))}

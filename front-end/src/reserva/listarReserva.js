@@ -52,7 +52,7 @@ const CompListarReservas=() =>{
                                     <td>{reserva.cantidad}</td>
                                     <td>{reserva.ClienteId}</td>
                                     
-                                    <td>{reserva.fecha}</td>
+                                    <td placeholder="dd-mm-yyyy">{reserva.fecha}</td>
                                     
                                     <td>{reserva.horario}</td>
                                 </tr>
