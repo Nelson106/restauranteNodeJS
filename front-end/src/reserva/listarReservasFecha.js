@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const URI='http://localhost:9090/api/reservas/'
+const URI='http://localhost:9090/api/reservas/fecha'
 
 const CompListarReservasF=() =>{
     const [reservas,setReservas]=useState([])
@@ -14,9 +14,9 @@ const CompListarReservasF=() =>{
     },[])
 
     //procedimiento para mostrar todas las Reservas
-
+    console.log("reservas",reservas)
     const getReservas = async() =>{
-        const res = await axios.get(URI)
+        const res = await axios.post(URI,{fecha:fecha})
         setReservas(res.data)       
      }
 
@@ -48,7 +48,7 @@ const CompListarReservasF=() =>{
                             {reservas.map ((reserva)=>(
                                 <tr key={reserva.id}>
                                     <td>{reserva.id}</td>
-                                    <td>{reserva.Restaurante.nombre}</td>
+                                    <td>{reserva.RestauranteRestauranteId}</td>
                                     <td>{reserva.MesaMesaId}</td>
                                     <td>{reserva.cantidad}</td>
                                     <td>{reserva.ClienteId}</td>

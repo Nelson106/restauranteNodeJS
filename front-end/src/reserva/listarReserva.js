@@ -8,12 +8,15 @@ const URI='http://localhost:9090/api/reservas/'
 const CompListarReservas=() =>{
     const [reservas,setReservas]=useState([])
     const [fecha,setFecha]=useState([])
+    const [fecha2,setFecha2]=useState([])
     useEffect(() =>{
         getReservas()
     },[])
 
     //procedimiento para mostrar todas las Reservas
-
+   
+    
+   
     const getReservas = async() =>{
        const res = await axios.get(URI)
        setReservas(res.data)       

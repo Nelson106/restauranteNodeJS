@@ -60,6 +60,24 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.findAllCedula = (req, res) => {
+    const cedula = req.body.cedula;
+    var condition = cedula ? {cedula: { [Op.eq]: cedula } } : null;
+
+    Cliente.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las mesas."
+            });
+        });
+}; 
+
+
+
 exports.update = (req, res) => {
     var id = req.params.id;
 
