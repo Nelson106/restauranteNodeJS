@@ -29,7 +29,6 @@ function App() {
           <a className="btn btn-secondary" href="/reservas" role="button">Reservas</a>
           <a className="btn btn-secondary" href="/restaurante" role="button">Restaurantes</a>
           <a className="btn btn-secondary" href="/mesas" role="button">Mesas</a>  
-          <a className="btn btn-secondary" href="/crearReserva" role="button">Crear Reserva</a>  
         </div>
         
       </header>

@@ -10,13 +10,15 @@ const CompCrearMesa = () => {
     const [px,setPx]= useState('')
     const [py,setPy]= useState('')
     const [capacity,setCapacity]= useState('')
+    const [restauranteId,setRestauranteId]= useState('')
     const navigate=useNavigate()
 
     //procedimient guardar
     const store = async (e) =>{
         e.preventDefault()
         console.log("title",title)
-        await axios.post(URI,{nombreMesa:title, piso:floor,posicionX:px,posicionY:py,capacidad:capacity})
+        await axios.post(URI,{nombreMesa:title, piso:floor,posicionX:px,posicionY:py,capacidad:capacity,
+            RestauranteRestauranteId:restauranteId})
         navigate('/mesas')
     }
     return (
@@ -65,6 +67,15 @@ const CompCrearMesa = () => {
                         value={capacity} 
                         onChange={(e)=> setCapacity(e.target.value)}
                         type="text"
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Capacidad</label>
+                    <input 
+                        value={restauranteId} 
+                        onChange={(e)=> setRestauranteId(e.target.value)}
+                        type="number"
                         className="form-control"
                     />
                 </div>
