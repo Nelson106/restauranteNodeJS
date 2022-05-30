@@ -37,6 +37,7 @@ const CompListarRestaurantes=() =>{
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Direccion</th>
+                                <th>Reservas</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
@@ -47,9 +48,11 @@ const CompListarRestaurantes=() =>{
                                     <td>{Restaurantes.nombre}</td>
                                     <td>{Restaurantes.direccion}</td>
                                     <td>
+                                        <Link to={'reservas/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-file-lines"></i></Link>
+                                    </td>
+                                    <td>
                                         <Link to={'update/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
                                         <button onClick={()=>deleteRestaurantes(Restaurantes.restauranteId)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
-                                        <Link to={'reservas/' + Restaurantes.restauranteId} className='btn btn-info'>Ver reservas</Link>
                                     </td>
                                 </tr>
                             ))}
