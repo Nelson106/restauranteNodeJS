@@ -5,8 +5,9 @@ import {useParams ,useNavigate } from "react-router-dom";
 const URI='http://localhost:9090/api/reservas/'
 
 
-const CompRestauranteReservas = () =>{
+const CompClienteReservas = () =>{
     const [reservas,setReservas]=useState([])
+    const {clienteId} = useParams();
     useEffect(() =>{
         getReservas()
     },[])
@@ -15,14 +16,16 @@ const CompRestauranteReservas = () =>{
 
     const getReservas = async() =>{
        const res = await axios.get(URI)
-       setReservas(res.data)
-    }
+       var dat = res.data;
+       var d = [];
+       var i;
+       for (i = 0; i < dat.length ; i++){
+           if(dat[i].ClienteId == clienteId){
+               d.push(dat[i])
+           }
 
-
-    const deleteReservas = async(id) =>{
-        
-       await axios.delete(URI+'/'+id)
-        getReservas()
+       }
+       setReservas(d)
     }
 
     return (
@@ -62,4 +65,4 @@ const CompRestauranteReservas = () =>{
     )
 }
 
-export default CompRestauranteReservas;
+export default CompClienteReservas;
