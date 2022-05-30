@@ -4,9 +4,16 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const URI = 'http://localhost:9090/api/reservas'
+const URI2 = 'http://localhost:9090/api/reservas/filter'
 
 const CompListarReservas = () => {
-    const [reservas, setReservas] = useState([])
+
+    var [reservas, setReservas] = useState([])
+    var [restauranteIdParam, setRestauranteIdParam] = useState('')
+    var [fechaParam, setFechaParam] = useState('')
+    var [clienteParam, setClienteParam] = useState('')
+
+
     useEffect(() => {
         getReservas()
     }, [])
@@ -18,11 +25,17 @@ const CompListarReservas = () => {
         setReservas(res.data)
     }
 
+    // mostrar reserva con los filtros
+    const getReservas2 = async (e) => {
+        e.preventDefault()
+        const res = await axios.get(URI2 + '/' + restauranteIdParam + '/' + fechaParam + '/' + clienteParam)
+        console.log(res)
+        setReservas(res.data)
+    }
 
-    const deleteReservas = async (id) => {
-
-        await axios.delete(URI + '/' + id)
-        getReservas()
+    // metodo para limpiar campos
+    const limpiar = async () => {
+        window.location.reload(false);
     }
 
     return (
@@ -33,13 +46,22 @@ const CompListarReservas = () => {
                     <div className="colum">
                         <nav class="navbar bg-light">
                             <div class="container-fluid">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" value={""}
+                                <form class="d-flex" role="search" onSubmit={getReservas2}>
+                                    <input class="form-control me-2" type="search"
+                                        value={restauranteIdParam}
+                                        onChange={(e) => setRestauranteIdParam(e.target.value)}
                                         placeholder="Restaurante" aria-label="Search" />
                                     <input class="form-control me-2" type="date"
-                                        placeholder="Search" aria-label="Search" value={""}/>
+                                        value={fechaParam}
+                                        onChange={(e) => setFechaParam(e.target.value)}
+                                        placeholder="Search" aria-label="Search" />
+                                    <input class="form-control me-2" type="search"
+                                        value={clienteParam}
+                                        onChange={(e) => setClienteParam(e.target.value)}
+                                        placeholder="Cliente" aria-label="Search" />
                                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                                 </form>
+                                <button class="btn btn-outline-success" type="submit" onClick={limpiar}>Limpiar</button>
                             </div>
                         </nav>
                     </div>
