@@ -47,7 +47,7 @@ const CompListarMesa=() =>{
                                 <tr key={mesa.mesaId}>
                                     <td>{mesa.mesaId}</td>
                                     <td>{mesa.nombreMesa}</td>
-                                    <td>{mesa.RestauranteRestauranteId}</td>
+                                    <td>{mesa.Restaurante.nombre}</td>
                                     <td>{mesa.piso}</td>
                                     <td>{mesa.capacidad}</td>
                                     <td>
