@@ -64,10 +64,11 @@ exports.filterRestaurante = (req, res) => {
 };
 
 exports.filterFecha = (req, res) => {
-    const date = req.body.fecha
+    const date = req.params.fecha
     let f = Date.parse(date)
-    Reserva.findAll({ where: {fecha:{[Op.eq]:f}} })
+    Reserva.findAll({ where: {fecha:{[Op.eq]:f}} ,include :[{model:modeloRestaurante}] })
         .then(data => {
+            console.log("aaaaaaaaa",data.nombre)
             res.send(data);
         })
         .catch(err => {
@@ -80,7 +81,7 @@ exports.filterFecha = (req, res) => {
 
 exports.filterCliente = (req, res) => {
     const id = req.params.id
-    Reserva.findAll({ where: {ClienteId:id} })
+    Reserva.findAll({ where: {ClienteId:id} ,include :[{model:modeloRestaurante}]})
         .then(data => {
             res.send(data);
         })

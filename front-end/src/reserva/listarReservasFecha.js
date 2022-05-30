@@ -16,7 +16,7 @@ const CompListarReservasF=() =>{
     //procedimiento para mostrar todas las Reservas
     console.log("reservas",reservas)
     const getReservas = async() =>{
-        const res = await axios.post(URI,{fecha:fecha})
+        const res = await axios.get(URI+'/'+fecha)
         setReservas(res.data)       
      }
 
@@ -48,7 +48,7 @@ const CompListarReservasF=() =>{
                             {reservas.map ((reserva)=>(
                                 <tr key={reserva.id}>
                                     <td>{reserva.id}</td>
-                                    <td>{reserva.RestauranteRestauranteId}</td>
+                                    <td>{reserva.RestauranteRestauranteid}</td>
                                     <td>{reserva.MesaMesaId}</td>
                                     <td>{reserva.cantidad}</td>
                                     <td>{reserva.ClienteId}</td>

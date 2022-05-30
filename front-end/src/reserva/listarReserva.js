@@ -15,11 +15,12 @@ const CompListarReservas=() =>{
 
     //procedimiento para mostrar todas las Reservas
    
-    
+    console.log("reseca",reservas)
    
     const getReservas = async() =>{
        const res = await axios.get(URI)
-       setReservas(res.data)       
+       setReservas(res.data)    
+          
     }
 
 
