@@ -50,7 +50,7 @@ exports.findOne = (req, res) => {
 };
 
 exports.filterRestaurante = (req, res) => {
-    const id = req.params.id
+    const id = req.body.RestauranteRestauranteId
     Reserva.findAll({ where: {RestauranteRestauranteId:id} })
         .then(data => {
             res.send(data);
