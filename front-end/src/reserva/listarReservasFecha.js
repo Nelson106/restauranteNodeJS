@@ -1,13 +1,14 @@
 import axios from "axios";
 //import { use } from "express/lib/router";
 import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const URI='http://localhost:9090/api/reservas/'
 
-const CompListarReservas=() =>{
+const CompListarReservasF=() =>{
     const [reservas,setReservas]=useState([])
-    const [fecha,setFecha]=useState([])
+    const {fecha} = useParams()
     useEffect(() =>{
         getReservas()
     },[])
@@ -16,7 +17,16 @@ const CompListarReservas=() =>{
 
     const getReservas = async() =>{
        const res = await axios.get(URI)
-       setReservas(res.data)       
+        var dat = res.data;
+        var d = []
+        var i;
+        console.log(dat[0].fecha)
+        for(i = 0; i < dat.lenght ; i++){
+            if(dat[i].fecha == fecha){
+                d.push(dat[i])
+            }
+        }
+        setReservas(d)       
     }
 
 
@@ -51,28 +61,16 @@ const CompListarReservas=() =>{
                                     <td>{reserva.MesaMesaId}</td>
                                     <td>{reserva.cantidad}</td>
                                     <td>{reserva.ClienteId}</td>
-                                    
-                                    <td>{reserva.fecha}</td>
-                                    
+                                    <td placeholder="dd-mm-yyyy">{reserva.fecha}</td>
                                     <td>{reserva.horario}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <div>
-                        <label>Filtrar por fecha: 
-                        <input  
-                            value={fecha} 
-                            onChange={(e)=> setFecha(e.target.value)}
-                            type="Date"
-                        />
-                        </label>
-                        <Link to={'fecha/'+fecha} className='btn btn-info'><i class="fa-solid fa-filter"></i></Link>
-                    </div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default CompListarReservas;
+export default CompListarReservasF;

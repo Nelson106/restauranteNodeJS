@@ -63,6 +63,21 @@ exports.filterRestaurante = (req, res) => {
         });
 };
 
+exports.filterFecha = (req, res) => {
+    const date = req.body.fecha
+    let f = Date.parse(date)
+    Reserva.findAll({ where: {fecha:{[Op.eq]:f}} })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las reservas."
+            });
+        });
+};
+
 exports.filterCliente = (req, res) => {
     const id = req.params.id
     Reserva.findAll({ where: {ClienteId:id} })
