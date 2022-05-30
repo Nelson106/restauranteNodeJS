@@ -3,8 +3,7 @@ import { useEffect,useState } from "react";
 import {useParams ,useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const URI='http://localhost:9090/api/reservas/'
-
+const URIC = 'http://localhost:9090/api/reservas/cliente'
 
 const CompClienteReservas = () =>{
     const [reservas,setReservas]=useState([])
@@ -14,19 +13,9 @@ const CompClienteReservas = () =>{
     },[])
 
     //procedimiento para mostrar todas las Reservas
-
-    const getReservas = async() =>{
-       const res = await axios.get(URI)
-       var dat = res.data;
-       var d = [];
-       var i;
-       for (i = 0; i < dat.length ; i++){
-           if(dat[i].ClienteId == clienteId){
-               d.push(dat[i])
-           }
-
-       }
-       setReservas(d)
+    const getReservas = async() => {
+        const res = await axios.post(URIC,{ClienteId:clienteId})
+        setReservas(res.data)
     }
 
     return (
@@ -50,7 +39,7 @@ const CompClienteReservas = () =>{
                             {reservas.map ((reserva)=>(
                                 <tr key={reserva.id}>
                                     <td>{reserva.id}</td>
-                                    <td>{reserva.Restaurante.nombre}</td>
+                                    <td>{reserva.RestauranteRestauranteId}</td>
                                     <td>{reserva.MesaMesaId}</td>
                                     <td>{reserva.cantidad}</td>
                                     <td>{reserva.ClienteId}</td>

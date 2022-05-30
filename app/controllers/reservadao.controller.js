@@ -79,8 +79,9 @@ exports.filterFecha = (req, res) => {
 };
 
 exports.filterCliente = (req, res) => {
-    const id = req.params.id
-    Reserva.findAll({ where: {ClienteId:id} })
+    const id = req.body.ClienteId
+    let c = parseInt(id)
+    Reserva.findAll({ where: {ClienteId:c} })
         .then(data => {
             res.send(data);
         })

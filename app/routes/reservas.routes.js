@@ -6,7 +6,7 @@ module.exports = app => {
     router.post("/filter", reserva.filter);
     router.get("/:id", reserva.findOne);
     router.get('/restaurante/:id',reserva.filterRestaurante);
-    router.get('/cliente/:id',reserva.filterCliente);
+    router.post('/cliente',reserva.filterCliente);
     router.post('/fecha',reserva.filterFecha);
     router.put("/:id", reserva.update);
     router.delete("/:id", reserva.delete);
