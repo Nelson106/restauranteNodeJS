@@ -63,6 +63,20 @@ exports.filterRestaurante = (req, res) => {
         });
 };
 
+exports.filterCliente = (req, res) => {
+    const id = req.params.id
+    Reserva.findAll({ where: {ClienteId:id} })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las reservas."
+            });
+        });
+};
+
 exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
