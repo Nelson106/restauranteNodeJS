@@ -49,6 +49,7 @@ const CompListarRestaurantes=() =>{
                                     <td>
                                         <Link to={'update/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
                                         <button onClick={()=>deleteRestaurantes(Restaurantes.restauranteId)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
+                                        <Link to={'reservas/' + Restaurantes.restauranteId} className='btn btn-info'>Ver reservas</Link>
                                     </td>
                                 </tr>
                             ))}

@@ -1,10 +1,11 @@
 import axios from "axios";
-//import { use } from "express/lib/router";
-import { useState,useEffect } from "react";
+import { useEffect,useState } from "react";
+import {useParams ,useNavigate } from "react-router-dom";
 
 const URI='http://localhost:9090/api/reservas/'
 
-const CompListarReservas=() =>{
+
+const CompRestauranteReservas = () =>{
     const [reservas,setReservas]=useState([])
     useEffect(() =>{
         getReservas()
@@ -14,7 +15,7 @@ const CompListarReservas=() =>{
 
     const getReservas = async() =>{
        const res = await axios.get(URI)
-       setReservas(res.data)       
+       setReservas(res.data)
     }
 
 
@@ -61,4 +62,4 @@ const CompListarReservas=() =>{
     )
 }
 
-export default CompListarReservas;
+export default CompRestauranteReservas;

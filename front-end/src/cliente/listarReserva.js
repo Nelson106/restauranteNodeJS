@@ -1,6 +1,7 @@
 import axios from "axios";
 //import { use } from "express/lib/router";
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const URI='http://localhost:9090/api/reservas/'
 
@@ -14,7 +15,14 @@ const CompListarReservas=() =>{
 
     const getReservas = async() =>{
        const res = await axios.get(URI)
-       setReservas(res.data)       
+         .then (res => {
+            setReservas(res.data)
+            console.log(res.data.RestauranteRestauranteId)
+         })
+         .catch (e => {
+             console.log(e)
+         })
+       
     }
 
 
