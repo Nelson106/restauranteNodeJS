@@ -17,6 +17,7 @@ const CompCrearReserva=() =>{
     const [restaurantes,setRestaurantes]=useState([])
     const [restauranteElegidoId,setRestauranteElegido]=useState([])
     const [fecha,setFecha]=useState([])
+
     const [horario11,setHorario1]=useState([])
     const [horario22,setHorario2]=useState([])
     const [horario33,setHorario3]=useState([])
@@ -24,10 +25,11 @@ const CompCrearReserva=() =>{
     const [horario55,setHorario5]=useState([])
     const [horario66,setHorario6]=useState([])
     const [horario77,setHorario7]=useState([])
+
+    const [clientes, setClientes] = useState([])
+    const [clienteElegidoId, setClienteElegido]=useState([])
+   
     
-
-
-
     const [mesas,setMesas]=useState([])
     const [mesaId,setMesaId]=useState([])
     const [capacidad,setCapacidad]=useState([])
@@ -36,11 +38,18 @@ const CompCrearReserva=() =>{
     },[])
     let component=null
    
-    
-    
-    
+
+    useEffect(() =>{
+        getClientes()
+    },[])
+
     const navigate=useNavigate()
     //procedimiento para mostrar todas las mesas
+
+    const getClientes = async() =>{
+        const res = await axios.get(URICLIENTE)
+        setClientes(res.data)
+    }
 
     const getRestaurantes = async() =>{
        const res = await axios.get(URIRESTAURANTE)
@@ -158,37 +167,37 @@ const CompCrearReserva=() =>{
         //setMesas(res.data)
         if(horario1){
             console.log("elegido1111",horario1)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId, restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:"12-13",mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario2){
             console.log("elegido2",horario2)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'13-14',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario3){
             console.log("elegido3",horario3)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'14-15',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario4){
             console.log("elegido4",horario4)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'19-20',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario5){
             console.log("elegido5",horario5)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'20-21',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario6){
             console.log("elegido6",horario6)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'21-22',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario7){
             console.log("elegido7",horario7)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'22-23',mesaId:mesaId,cantidad:res.data.capacidad})
         }
        
@@ -201,13 +210,46 @@ const CompCrearReserva=() =>{
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Link to="/create" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-plus"></i></Link>
+                    <th>Clientes</th>
+                    <table className="table">
+                        <thead className="table-primary">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Cedula</th>
+                                <th>Seleccionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {clientes.map ((cliente)=>(
+                                <tr key={cliente.id}>
+                                    <td>{cliente.nombre}</td>
+                                    <td>{cliente.apellido}</td>
+                                    <td>{cliente.cedula}</td>
+                                    <td>
+                                    <input 
+                                        value={cliente.id} 
+                                        onChange={(e)=> setClienteElegido(e.target.value)}
+                                        type="checkbox"
+                                        
+                                    />
+                                      
+                                        
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                       
+                        
+                    </table>
+                    
+                    <th>Restaurantes</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Direccion</th>
-                                
+                                <th>Seleccionar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -231,14 +273,16 @@ const CompCrearReserva=() =>{
                        
                         
                     </table>
+                    <th>Seleccionar fecha de Reserva</th>
                     <div  className="row col l6">
+                    
                     <input  
                         value={fecha} 
                         onChange={(e)=> setFecha(e.target.value)}
                         type="Date"
                     />
                     </div>
-                    
+                    <th>Seleccionar Horario de Reserva</th>
                     <label className="hora1" >12-13</label>
                 
                     <input
@@ -290,7 +334,9 @@ const CompCrearReserva=() =>{
                 </div>
             </div>
         </div>
+
          {component}
+
         <button type="submit" className="btn btn-primary">Guardar</button>
         </form>
     )

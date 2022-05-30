@@ -29,13 +29,14 @@ const CompListarMesa=() =>{
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Link to="/mesas/crear" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
+                    <Link to="/mesas/crear" className='btn btn-success'>Crear Mesa <i className="fa-solid fa-table"></i></Link>
                     <th>Lista de Mesas</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Restaurante</th>
                                 <th>Piso</th>
                                 <th>Capacidad</th>
                                 <th>Action</th>
@@ -46,6 +47,7 @@ const CompListarMesa=() =>{
                                 <tr key={mesa.mesaId}>
                                     <td>{mesa.mesaId}</td>
                                     <td>{mesa.nombreMesa}</td>
+                                    <td>{mesa.RestauranteRestauranteId}</td>
                                     <td>{mesa.piso}</td>
                                     <td>{mesa.capacidad}</td>
                                     <td>

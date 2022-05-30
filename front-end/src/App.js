@@ -15,6 +15,9 @@ import CompListarReservas from './reserva/listarReserva';
 import CompEditarMesa from './mesas/actualizarMesa';
  
 import CompCrearReserva from './reserva/crearReserva';
+import CompRestauranteReservas from './restaurante/listarReservasR';
+import CompClienteReservas from './cliente/listarReservasC';
+import CompListarReservasF from './reserva/listarReservasFecha';
 
 
 
@@ -29,6 +32,7 @@ function App() {
           <a className="btn btn-secondary" href="/reservas" role="button">Reservas</a>
           <a className="btn btn-secondary" href="/restaurante" role="button">Restaurantes</a>
           <a className="btn btn-secondary" href="/mesas" role="button">Mesas</a>  
+          <a className="btn btn-secondary" href="/crearReserva" role="button">Crear Reserva</a>  
         </div>
         
       </header>
@@ -42,10 +46,14 @@ function App() {
               <Route path='/restaurante' element={ <CompListarRestaurantes/> }  />
               <Route path='/restaurante/crear' element={ <CompCrearRestaurante/> } />
               <Route path='/restaurante/update/:restauranteId' element={ <CompEditarRestaurante/> } />
+              <Route path='/restaurante/reservas/:restauranteId' element={ <CompRestauranteReservas/>}/>
               <Route path='/crearReserva' element={ <CompCrearReserva /> } />
               <Route path='/reservas' element={<CompListarReservas />} />
+              <Route path='/reservas/fecha/:fecha' element={<CompListarReservasF />} />
               <Route path='/cliente' element={<CompListarClientes />} />
               <Route path='/cliente/crear' element={<CompCrearCliente />} />
+              <Route path='/cliente/reservas/:clienteId' element={ <CompClienteReservas/>}/>
+
 
             </Routes>
         </BrowserRouter>
