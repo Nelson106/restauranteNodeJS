@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const URI='http://localhost:9090/api/mesas'
+const URIRESTAURANTE='http://localhost:9090/api/restaurantes'
 
 const CompCrearMesa = () => {
     const [title,setTitle]= useState('')
@@ -10,13 +11,24 @@ const CompCrearMesa = () => {
     const [px,setPx]= useState('')
     const [py,setPy]= useState('')
     const [capacity,setCapacity]= useState('')
+    const [restaurantes,setRestaurantes]=useState([])
+    const [restauranteElegidoId,setRestauranteElegido]=useState([])
+
     const navigate=useNavigate()
 
+    useEffect(() =>{
+        getRestaurantes()
+    },[])
+
+    const getRestaurantes = async() =>{
+        const res = await axios.get(URIRESTAURANTE)
+        setRestaurantes(res.data)
+     }
     //procedimient guardar
     const store = async (e) =>{
         e.preventDefault()
         console.log("title",title)
-        await axios.post(URI,{nombreMesa:title, piso:floor,posicionX:px,posicionY:py,capacidad:capacity})
+        await axios.post(URI,{nombreMesa:title, restauranteId:restauranteElegidoId, piso:floor,posicionX:px,posicionY:py,capacidad:capacity})
         navigate('/mesas')
     }
     return (
@@ -31,6 +43,40 @@ const CompCrearMesa = () => {
                         type="text"
                         className="form-control"
                     />
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <th>Seleccionar Restaurante:</th>
+                        <table className="table">
+                            <thead className="table-primary">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Direccion</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                {restaurantes.map((restaurante)=>(
+                                    <tr key={restaurante.restauranteId}>
+                                        <td>{restaurante.nombre}</td>
+                                        <td>{restaurante.direccion}</td>
+                                        <td>
+                                            <input
+                                                value={restaurante.restauranteId}
+                                                onChange={(e)=> setRestauranteElegido(e.target.value)}
+                                                type="checkbox"
+                                            />
+                                        </td>
+
+                                    </tr>
+                                ))}
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Piso</label>
