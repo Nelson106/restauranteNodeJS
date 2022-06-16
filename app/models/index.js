@@ -21,6 +21,7 @@ db.Restaurante = require("./restaurante.models.js")(sequelize, Sequelize);
 db.Mesas = require("./mesas.models.js")(sequelize, Sequelize);
 db.Cliente = require("./cliente.models.js")(sequelize, Sequelize);
 db.Reservas = require("./reservas.models.js")(sequelize, Sequelize);
+db.Categoria = require("./categoria.models.js")(sequelize, Sequelize);
 
 // un a a muchos 1 a N
 //Restaurante va a tener muchas mesas
