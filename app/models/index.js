@@ -23,6 +23,8 @@ db.Cliente = require("./cliente.models.js")(sequelize, Sequelize);
 db.Reservas = require("./reservas.models.js")(sequelize, Sequelize);
 db.Categoria = require("./categoria.models.js")(sequelize, Sequelize);
 db.Producto = require("./producto.models.js")(sequelize, Sequelize);
+db.DetalleConsumo = require("./detalleConsumo.models.js")(sequelize, Sequelize);
+db.Consumo = require("./consumo.models.js")(sequelize, Sequelize);
 
 // un a a muchos 1 a N
 //Restaurante va a tener muchas mesas
@@ -34,6 +36,9 @@ db.Mesas.belongsTo(db.Restaurante);
 
 //Se añade una clave de categoria a producto
 db.Producto.belongsTo(db.Categoria, {foreignkey:"categoriaId"});
+
+// se añade una clave ConsumoId a la tabla detalleConsumo
+db.Consumo.hasMany(db.DetalleConsumo,{foreignkey:"consumoId"});
 
 //Prueba de relaciones con reserva
 db.Reservas.belongsTo(db.Restaurante, {foreignkey: "restauranteId"});
