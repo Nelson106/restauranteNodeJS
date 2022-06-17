@@ -24,7 +24,8 @@ module.exports=(sequelize,Sequelize) =>{
         capacidad:{
             type:Sequelize.INTEGER,
             defaultValue:1
-        }
+        },
+        
 
     });
 

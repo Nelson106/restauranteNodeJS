@@ -1,25 +1,23 @@
 const db = require("../models");
-const Cliente = db.Cliente;
+const Categoria = db.Categoria;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
     // Validate request
-    validador = validarCliente(req);
+    validador = validarCategoria(req);
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
     }
-    // crea un cliente
-    const cliente = {
-        id: req.body.id,
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        cedula: req.body.cedula
+    // crea una categoria
+    const categoria = {
+        categoriaId: req.body.categoriaId,
+        nombre: req.body.nombre
     };
     // Guardamos a la base de datos
-    Cliente.create(cliente)
+    Categoria.create(categoria)
         .then(data => {
             res.send(data);
         })
@@ -32,8 +30,8 @@ exports.create = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    const id = req.params.id;
-    Cliente.findByPk(id)
+    const id = req.params.categoriaId;
+    Categoria.findByPk(id)
         .then(data => {
             res.send(data);
         })
@@ -48,7 +46,7 @@ exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
-    Cliente.findAll({ where: condition })
+    Categoria.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -60,28 +58,11 @@ exports.findAll = (req, res) => {
         });
 };
 
-exports.findAllCedula = (req, res) => {
-    const cedula = req.body.cedula;
-    var condition = cedula ? {cedula: { [Op.eq]: cedula } } : null;
-
-    Cliente.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Ocurrio un error al obtener las mesas."
-            });
-        });
-}; 
-
-
 
 exports.update = (req, res) => {
-    var id = req.params.id;
+    var id = req.params.categoriaId;
 
-    validador = validarCliente(req);
+    validador = validarCategoria(req);
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
@@ -89,13 +70,11 @@ exports.update = (req, res) => {
         return;
     }
 
-    Cliente.findByPk(id)
-        .then(cliente => {
-            cliente.nombre = req.body.nombre;
-            cliente.apellido = req.body.apellido,
-            cliente.cedula = req.body.cedula;
-            cliente.save();
-            res.send(cliente);
+    Categoria.findByPk(id)
+        .then(categoria => {
+            categoria.nombre = req.body.nombre;
+            categoria.save();
+            res.send(categoria);
         })
         .catch(err => {
             res.status(500).send({
@@ -105,11 +84,11 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.categoriaId;
 
-    Cliente.findByPk(id)
-        .then(cliente => {
-            cliente.destroy();
+    Categoria.findByPk(id)
+        .then(categoria => {
+            categoria.destroy();
             res.send();
         })
         .catch(err => {
@@ -119,23 +98,11 @@ exports.delete = (req, res) => {
         });
 };
 
-function validarCliente(req) {
+function validarCategoria(req) {
     if (!req.body.nombre) {
         return {
             isValid: false,
-            message: "Debe enviar el nombre de la cliente."
-        };
-    }
-    if (!req.body.apellido) {
-        return {
-            isValid: false,
-            message: "Debe enviar el nombre."
-        };
-    }
-    if (!req.body.cedula) {
-        return {
-            isValid: false,
-            message: "Debe enviar la cedula."
+            message: "Debe enviar el nombre de la categoria."
         };
     }
     return {

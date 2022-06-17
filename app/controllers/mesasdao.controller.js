@@ -1,5 +1,8 @@
+const { Mesas } = require("../models");
 const db = require("../models");
 const Mesa = db.Mesas;
+const Restaurante=db.Restaurante;
+const Reserva=db.Reservas;
 const Op = db.Sequelize.Op;
 const modeloRestaurante=require("../models").Restaurante
 exports.create = (req, res) => {
@@ -104,6 +107,72 @@ exports.delete = (req, res) => {
             });
         });
 }
+
+exports.findAllByRestaurante = (req, res) => {
+    const restauranteId = req.params.restauranteId;
+    var condition = restauranteId ? {RestauranteRestauranteId: { [Op.eq]: restauranteId } } : null;
+
+    Mesa.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las mesas."
+            });
+        });
+}; 
+
+exports.listarMesas=(req,res) =>{
+    const restaurante=req.body.restauranteId;
+     const fechaS=req.body.fecha;
+    const horario=req.body.horario
+    let fecha = Date.parse(fechaS);
+    Reserva.findAll({
+        where:{
+            RestauranteRestauranteId :restaurante,
+            fecha:{
+                [Op.eq]:fecha
+            },
+            horario:horario
+        }
+    })
+    .then(reservasActuales => {
+       
+        var mesasOcupadas = [];
+        reservasActuales.map( reserva => {
+            mesasOcupadas.push(reserva.MesaMesaId);
+            console.log("ocupadaaaaas",reserva.MesaMesaId);
+        });
+        
+        var condition = restaurante ? {RestauranteRestauranteId: { [Op.eq]: restaurante } } : null;
+
+        Mesa.findAll({ where: condition })
+            .then(totalMesas => {
+                var mesasDisponibles = totalMesas.filter(
+                    mesa => !mesasOcupadas.includes(mesa.mesaId)
+                );
+                res.send(mesasDisponibles);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Ocurrio un error al obtener las mesas."
+                });
+            });
+
+        
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Ocurrio un error al obtener las mesas."
+        });
+    });
+}
+
+
 
 function validarMesa(req){
     if (!req.body.nombreMesa) {

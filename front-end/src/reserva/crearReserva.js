@@ -17,30 +17,39 @@ const CompCrearReserva=() =>{
     const [restaurantes,setRestaurantes]=useState([])
     const [restauranteElegidoId,setRestauranteElegido]=useState([])
     const [fecha,setFecha]=useState([])
-   /* const [horario1,setHorario1]=useState([])
-    const [horario2,setHorario2]=useState([])
-    const [horario3,setHorario3]=useState([])
-    const [horario4,setHorario4]=useState([])
-    const [horario5,setHorario5]=useState([])
-    const [horario6,setHorario6]=useState([])
-    const [horario7,setHorario7]=useState([])*/
+
+    const [horario11,setHorario1]=useState([])
+    const [horario22,setHorario2]=useState([])
+    const [horario33,setHorario3]=useState([])
+    const [horario44,setHorario4]=useState([])
+    const [horario55,setHorario5]=useState([])
+    const [horario66,setHorario6]=useState([])
+    const [horario77,setHorario7]=useState([])
+
+    const [clientes, setClientes] = useState([])
+    const [clienteElegidoId, setClienteElegido]=useState([])
+   
     
-
-
-
     const [mesas,setMesas]=useState([])
     const [mesaId,setMesaId]=useState([])
     const [capacidad,setCapacidad]=useState([])
     useEffect(() =>{
         getRestaurantes()
     },[])
+    let component=null
+   
 
     useEffect(() =>{
-        getMesas()
+        getClientes()
     },[])
 
     const navigate=useNavigate()
     //procedimiento para mostrar todas las mesas
+
+    const getClientes = async() =>{
+        const res = await axios.get(URICLIENTE)
+        setClientes(res.data)
+    }
 
     const getRestaurantes = async() =>{
        const res = await axios.get(URIRESTAURANTE)
@@ -49,85 +58,146 @@ const CompCrearReserva=() =>{
     const handleChexbox1 = (e) => {
         
          horario1=e.target.checked
-         console.log("adsada",horario1)
-       
+        setHorario1(horario1)
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        getMesas(restauranteElegidoId,fecha,'12-13')
       }
       const handleChexbox2 = (e) => {
         
          horario2=e.target.checked
-       
+         setHorario2(horario2)
+         getMesas(restauranteElegidoId,fecha,'13-14')
       }
       const handleChexbox3 = (e) => {
         
          horario3=e.target.checked
-       
+         setHorario3(horario3)
+         getMesas(restauranteElegidoId,fecha,'14-15')
       }
       const handleChexbox4 = (e) => {
         
         horario4=e.target.checked
+        setHorario4(horario4)
+        getMesas(restauranteElegidoId,fecha,'19-20')
        
       }
       const handleChexbox5 = (e) => {
         
          horario5=e.target.checked
-       
+         setHorario5(horario5)
+         getMesas(restauranteElegidoId,fecha,'20-21')
       }
       const handleChexbox6 = (e) => {
         
          horario6=e.target.checked
+         setHorario6(horario6)
+         getMesas(restauranteElegidoId,fecha,'21-22')
        
       }
       const handleChexbox7 = (e) => {
         
          horario7=e.target.checked
+         setHorario7(horario7)
+         getMesas(restauranteElegidoId,fecha,'22-23')
        
       }
     //procedimiento para mostrar todas las mesas
+   
+    
+      /*  useEffect(() =>{
+            
+        },[])*/
 
-    const getMesas = async() =>{
-        const res = await axios.get(URIMESA)
+   
+    const getMesas = async(r,f,h) =>{
+        console.log("rrrr",r,f,h)
+        const res = await axios.post('http://localhost:9090/api/mesas/listarMesas',{restauranteId:r,fecha:fecha,horario:h})
         setMesas(res.data)
      }
+     
+     if(restauranteElegidoId!="" && fecha!="" && (horario1 || horario2 || horario3 || 
+        horario4 || horario5 || horario6 || horario7)){
+        component=<div className="container">
+        <div className="row">
+            <div className="col">
+                <Link to="/mesas/crear" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
+                <th>Lista de Mesas</th>
+                <table className="table">
+                    <thead className="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Piso</th>
+                            <th>Capacidad</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {mesas.map ((mesa)=>(
+                            <tr key={mesa.mesaId}>
+                                <td>{mesa.mesaId}</td>
+                                <td>{mesa.nombreMesa}</td>
+                                <td>{mesa.piso}</td>
+                                <td>{mesa.capacidad}</td>
+                                <td>
+                                        <input
+                                            
+                                            value={mesa.mesaId}
+                                            onChange={(e)=> setMesaId(e.target.value)}
+                                            type="checkbox"
+                                            
+                                        />
+                                   
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    }
     const guardarReserva = async (e) =>{
         e.preventDefault()
         const res = await axios.get(URIMESA+'/'+mesaId)
-
+            
         console.log("mesa elegida",horario1)
         
+  
         //setMesas(res.data)
         if(horario1){
             console.log("elegido1111",horario1)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId, restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:"12-13",mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario2){
             console.log("elegido2",horario2)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'13-14',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario3){
             console.log("elegido3",horario3)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'14-15',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario4){
             console.log("elegido4",horario4)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'19-20',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario5){
             console.log("elegido5",horario5)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'20-21',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario6){
             console.log("elegido6",horario6)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'21-22',mesaId:mesaId,cantidad:res.data.capacidad})
         }
         if(horario7){
             console.log("elegido7",horario7)
-            await axios.post(URI,{restauranteId:restauranteElegidoId,fecha:fecha,
+            await axios.post(URI,{clienteId:clienteElegidoId,restauranteId:restauranteElegidoId,fecha:fecha,
                 horario:'22-23',mesaId:mesaId,cantidad:res.data.capacidad})
         }
        
@@ -140,13 +210,46 @@ const CompCrearReserva=() =>{
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Link to="/create" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-plus"></i></Link>
+                    <th>Clientes</th>
+                    <table className="table">
+                        <thead className="table-primary">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Cedula</th>
+                                <th>Seleccionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {clientes.map ((cliente)=>(
+                                <tr key={cliente.id}>
+                                    <td>{cliente.nombre}</td>
+                                    <td>{cliente.apellido}</td>
+                                    <td>{cliente.cedula}</td>
+                                    <td>
+                                    <input 
+                                        value={cliente.id} 
+                                        onChange={(e)=> setClienteElegido(e.target.value)}
+                                        type="checkbox"
+                                        
+                                    />
+                                      
+                                        
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                       
+                        
+                    </table>
+                    
+                    <th>Restaurantes</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Direccion</th>
-                                
+                                <th>Seleccionar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -170,14 +273,16 @@ const CompCrearReserva=() =>{
                        
                         
                     </table>
+                    <th>Seleccionar fecha de Reserva</th>
                     <div  className="row col l6">
+                    
                     <input  
                         value={fecha} 
                         onChange={(e)=> setFecha(e.target.value)}
                         type="Date"
                     />
                     </div>
-                    
+                    <th>Seleccionar Horario de Reserva</th>
                     <label className="hora1" >12-13</label>
                 
                     <input
@@ -229,45 +334,8 @@ const CompCrearReserva=() =>{
                 </div>
             </div>
         </div>
-        <div className="container">
-            <div className="row">
-                <div className="col">
-                    <Link to="/mesas/crear" className='btn btn-success'><i className="fa-solid fa-plus"></i></Link>
-                    <th>Lista de Mesas</th>
-                    <table className="table">
-                        <thead className="table-primary">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Piso</th>
-                                <th>Capacidad</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {mesas.map ((mesa)=>(
-                                <tr key={mesa.mesaId}>
-                                    <td>{mesa.mesaId}</td>
-                                    <td>{mesa.nombreMesa}</td>
-                                    <td>{mesa.piso}</td>
-                                    <td>{mesa.capacidad}</td>
-                                    <td>
-                                            <input
-                                                
-                                                value={mesa.mesaId}
-                                                onChange={(e)=> setMesaId(e.target.value)}
-                                                type="checkbox"
-                                                
-                                            />
-                                       
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+
+         {component}
 
         <button type="submit" className="btn btn-primary">Guardar</button>
         </form>

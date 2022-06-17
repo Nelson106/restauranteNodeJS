@@ -3,6 +3,7 @@ const Reserva = db.Reservas;
 const Op = db.Sequelize.Op;
 const modeloRestaurante = db.Restaurante;
 const modeloMesa = db.Mesas;
+const modeloCliente=db.Cliente;
 exports.create = (req, res) => {
     // Validate request
     validador = validarReserva(req)
@@ -50,8 +51,8 @@ exports.findOne = (req, res) => {
 };
 
 exports.filterRestaurante = (req, res) => {
-    const id = req.params.id
-    Reserva.findAll({ where: {RestauranteRestauranteId:id} })
+    const id = req.body.RestauranteRestauranteId
+    Reserva.findAll({ where: {RestauranteRestauranteId:id},include :[{model:modeloRestaurante},{model:modeloMesa},{model:modeloCliente}] })
         .then(data => {
             res.send(data);
         })
@@ -63,9 +64,27 @@ exports.filterRestaurante = (req, res) => {
         });
 };
 
+exports.filterFecha = (req, res) => {
+    const date = req.body.fecha
+    let f = Date.parse(date)
+    Reserva.findAll({ where: {fecha:{[Op.eq]:f}} ,include :[{model:modeloRestaurante},{model:modeloMesa},{model:modeloCliente}] })
+        .then(data => {
+            console.log("aaaaaaaaa",data.nombre)
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las reservas."
+            });
+        });
+};
+
 exports.filterCliente = (req, res) => {
-    const id = req.params.id
-    Reserva.findAll({ where: {ClienteId:id} })
+
+    const id = req.body.ClienteId
+    let c = parseInt(id)
+    Reserva.findAll({ where: {ClienteId:c},include :[{model:modeloRestaurante},{model:modeloMesa},{model:modeloCliente}] })
         .then(data => {
             res.send(data);
         })
@@ -81,7 +100,7 @@ exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
 
-    Reserva.findAll({ where: condition, include :[{model:modeloRestaurante}] })
+    Reserva.findAll({ where: condition, include :[{model:modeloRestaurante},{model:modeloMesa},{model:modeloCliente}]})
         .then(data => {
             res.send(data);
         })

@@ -1,23 +1,25 @@
 import axios from "axios";
-import { useEffect,useState } from "react";
-import {useParams ,useNavigate } from "react-router-dom";
+//import { use } from "express/lib/router";
+import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const URI='http://localhost:9090/api/reservas/'
-const URIR ='http://localhost:9090/api/reservas/restaurante'
+const URI='http://localhost:9090/api/reservas/fecha'
 
-const CompRestauranteReservas = () =>{
+const CompListarReservasF=() =>{
     const [reservas,setReservas]=useState([])
-    const {restauranteId} = useParams();
+    const {fecha} = useParams()
     useEffect(() =>{
         getReservas()
     },[])
 
     //procedimiento para mostrar todas las Reservas
+    console.log("reservas",reservas)
     const getReservas = async() =>{
-        const res = await axios.post(URIR,{RestauranteRestauranteId:restauranteId})
-        setReservas(res.data)
-    }
+        //const res = await axios.get(URI+'/'+fecha)
+        const res = await axios.post(URI,{fecha:fecha})
+        setReservas(res.data)       
+     }
 
 
     const deleteReservas = async(id) =>{
@@ -57,11 +59,10 @@ const CompRestauranteReservas = () =>{
                             ))}
                         </tbody>
                     </table>
-                    <Link to={'/restaurante'} className='btn btn-info'><i class="fa-solid fa-backward"> </i>Atras</Link>
                 </div>
             </div>
         </div>
     )
 }
 
-export default CompRestauranteReservas;
+export default CompListarReservasF;
