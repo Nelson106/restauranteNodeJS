@@ -1,13 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const DetalleConsumo = sequelize.define("DetalleConsumo", {
-        detalleConsumoId: {
+        id: {
             type: Sequelize.BIGINT,
             primaryKey: true,
             autoIncrement: true
-        },
-        productoId: {
-            type: Sequelize.BIGINT,
-            allowNull: false
         },
         cantidad: {
             type: Sequelize.BIGINT,

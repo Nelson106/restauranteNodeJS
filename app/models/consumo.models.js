@@ -1,25 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
     const Consumo = sequelize.define("Consumo", {
-        consumoId: {
+        id: {
             type: Sequelize.BIGINT,
             primaryKey: true,
             autoIncrement: true
         },
-        mesaId: {
-            type: Sequelize.BIGINT,
-            allowNull: false
-        },
-        clienteId: {
-            type: Sequelize.BIGINT,
-            allowNull: false
-        },
         estado: {
             type: Sequelize.STRING,
+            enum:['abierto','cerrado'],
+            default:'abierto',
             allowNull: false,
         },
         total: {
             type: Sequelize.BIGINT,
-            allowNull: false
+            default:0
         },
         fechaCreacion: {
             type: Sequelize.DATE,

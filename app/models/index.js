@@ -37,11 +37,19 @@ db.Mesas.belongsTo(db.Restaurante);
 //Se añade una clave de categoria a producto
 db.Producto.belongsTo(db.Categoria, {foreignkey:"categoriaId"});
 
-// se añade una clave ConsumoId a la tabla detalleConsumo
-db.Consumo.hasMany(db.DetalleConsumo,{foreignkey:"consumoId"});
-
 //Prueba de relaciones con reserva
 db.Reservas.belongsTo(db.Restaurante, {foreignkey: "restauranteId"});
 db.Reservas.belongsTo(db.Mesas, {foreignkey: "mesaId"});
 db.Reservas.belongsTo(db.Cliente, {foreignkey: "id"});
+
+// se añade una clave ConsumoId a la tabla detalleConsumo
+db.Consumo.hasMany(db.DetalleConsumo,{foreignkey:"consumoId"});
+
+db.Mesas.hasMany(db.Consumo,{foreignkey:"mesaId"});
+db.Consumo.belongsTo(db.Mesas,{foreignkey:"mesaId"});
+
+db.Cliente.hasMany(db.Consumo,{foreignkey:"clienteId"});
+db.Consumo.belongsTo(db.Cliente,{foreignkey:"consumoId"});
+
+
 module.exports = db;
