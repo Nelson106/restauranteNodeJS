@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
     // Validate request
     validador = validarConsumo(req);
-    if (!validador.isValid) {
+    if (!validador.isValid || req.consumo == 'cerrado')  {
         res.status(400).send({
             message: validador.message
         });
@@ -114,7 +114,7 @@ function validarConsumo(req) {
             message: "Debe enviar clienteId."
         };
     }
-    if (req.body.estado != "cerrado" || req.body.estado != "abierto") {
+    if (!req.body.estado) {
         return {
             isValid: false,
             message: "Debe enviar estado cerrado o abierto."

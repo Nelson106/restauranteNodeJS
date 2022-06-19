@@ -43,6 +43,9 @@ require("./app/routes/cliente.routes")(app);
 require("./app/routes/reservas.routes")(app);
 require("./app/routes/categoria.route")(app);
 require("./app/routes/producto.routes")(app);
+require("./app/routes/consumo.routes")(app);
+require("./app/routes/detalleConsumo.routes")(app);
+
 
 // set port, listen for requests
 

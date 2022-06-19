@@ -11,6 +11,6 @@ module.exports = app => {
     app.use('/api/detalleConsumo', router);
 
     //rutas para filtros
-    router.post('/consumo', reserva.filterConsumo);
+    //router.post('/consumo', reserva.filterConsumo);
 };
 

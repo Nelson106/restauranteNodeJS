@@ -47,7 +47,7 @@ exports.findOne = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    DetalleConsumo.findAll({ include: { model: modeloConsumo } })
+    DetalleConsumo.findAll()
         .then(data => {
             res.send(data);
         })
@@ -113,7 +113,7 @@ function validarDetalle(req) {
             message: "Debe enviar la cantidad."
         };
     }
-    if (!req.body.ConsumoConsumoId) {
+    if (!req.body.consumoConsumoId) {
         return {
             isValid: false,
             message: "Debe enviar id del consumo."
