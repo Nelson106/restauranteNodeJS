@@ -18,6 +18,7 @@ import CompCrearReserva from './reserva/crearReserva';
 import CompRestauranteReservas from './restaurante/listarReservasR';
 import CompClienteReservas from './cliente/listarReservasC';
 import CompListarReservasF from './reserva/listarReservasFecha';
+import CompRestauranteMesas from './restaurante/listarMesas';
 
 
 
@@ -47,6 +48,7 @@ function App() {
               <Route path='/restaurante/crear' element={ <CompCrearRestaurante/> } />
               <Route path='/restaurante/update/:restauranteId' element={ <CompEditarRestaurante/> } />
               <Route path='/restaurante/reservas/:restauranteId' element={ <CompRestauranteReservas/>}/>
+              <Route path='/restaurante/mesas/:restauranteId' element={ <CompRestauranteMesas/>}/>
               <Route path='/crearReserva' element={ <CompCrearReserva /> } />
               <Route path='/reservas' element={<CompListarReservas />} />
               <Route path='/reservas/fecha/:fecha' element={<CompListarReservasF />} />

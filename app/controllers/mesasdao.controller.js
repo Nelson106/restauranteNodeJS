@@ -5,6 +5,7 @@ const Restaurante=db.Restaurante;
 const Reserva=db.Reservas;
 const Op = db.Sequelize.Op;
 const modeloRestaurante=require("../models").Restaurante
+const modeloMesa=require("../models");
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.nombreMesa) {
@@ -124,9 +125,24 @@ exports.findAllByRestaurante = (req, res) => {
         });
 }; 
 
+exports.filterRestaurante = (req, res) => {
+    const restauranteId = req.body.RestauranteRestauranteId;
+    var condition = restauranteId ? {RestauranteRestauranteId: { [Op.eq]: restauranteId } } : null;
+    Mesa.findAll({ where: condition,include :[{model:modeloRestaurante}] })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las mesas."
+            });
+        });
+};
+
 exports.listarMesas=(req,res) =>{
     const restaurante=req.body.restauranteId;
-     const fechaS=req.body.fecha;
+    const fechaS=req.body.fecha;
     const horario=req.body.horario
     let fecha = Date.parse(fechaS);
     Reserva.findAll({
