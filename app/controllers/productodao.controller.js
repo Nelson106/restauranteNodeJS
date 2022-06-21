@@ -63,29 +63,29 @@ exports.findAll = (req, res) => {
 
 
 exports.update = (req, res) => {
-    var id = req.params.productoId;
-
-    validador = validarProducto(req);
+    const id = req.params.id;
+    
+    validador = validarProducto(req)
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
     }
-
+    
     Producto.findByPk(id)
         .then(producto => {
-            producto.nombre = req.body.nombre;
-            producto.precioVenta = req.body.precioVenta;
-            categoria.save();
+            producto.nombre= req.body.nombre;
+            producto.precioVenta= req.body.precioVenta;
+            producto.save();
             res.send(producto);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener producto con id= " + id
+                message: "Error al obtener producto CD con id=" + id
             });
         });
-};
+}
 
 exports.delete = (req, res) => {
     const id = req.params.productoId;

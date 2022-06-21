@@ -22,6 +22,9 @@ import CompRestauranteMesas from './restaurante/listarMesas';
 import CompListarCategorias from './categoria/listarCategoria';
 import CompEditarCategoria from './categoria/editarCategoria';
 import CompCrearCategoria from './categoria/crearCategoria';
+import CompListarProducto from './producto/listarProducto';
+import CompEditarProducto from './producto/editarProducto';
+import CompCrearProducto from './producto/crearProducto';
 
 
 
@@ -34,7 +37,8 @@ function App() {
         <div className="btn-group" role="group" aria-label="Basic example">
           <a className="btn btn-secondary" href="/" role="button">Home</a>
           <a className="btn btn-secondary" href="/cliente" role="button">Clientes</a>
-          <a className='btn btn-secondary' href="/categoria">Categoria</a> 
+          <a className='btn btn-secondary' href="/categoria">Categorias</a> 
+          <a className='btn btn-secondary' href="/producto">Productos</a> 
           <a className="btn btn-secondary" href="/restaurante" role="button">Restaurantes</a>
           <a className="btn btn-secondary" href="/mesas" role="button">Mesas</a>
           <a className="btn btn-secondary" href="/reservas" role="button">Reservas</a>  
@@ -51,6 +55,10 @@ function App() {
               <Route path='/categoria' element={ <CompListarCategorias/> }/>
               <Route path='/categoria/crear' element={ <CompCrearCategoria/>}/>
               <Route path='/categoria/update/:categoriaId' element={ <CompEditarCategoria/> } />
+
+              <Route path='/producto' element={ <CompListarProducto/> }/>
+              <Route path='/producto/crear' element= { <CompCrearProducto/>  } />
+              <Route path='/producto/update/:productoId' element={ <CompEditarProducto/> }/>
 
               <Route path='/restaurante' element={ <CompListarRestaurantes/> }  />
               <Route path='/restaurante/crear' element={ <CompCrearRestaurante/> } />
