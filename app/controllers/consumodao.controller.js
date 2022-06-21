@@ -4,17 +4,17 @@ const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
     // Validate request
-    validador = validarConsumo(req);
+  /*  validador = validarConsumo(req);
     if (!validador.isValid || req.consumo == 'cerrado')  {
         res.status(400).send({
             message: validador.message
         });
         return;
-    }
+    }*/
     // estructura de consumo
     const consumo = {
-        mesaId: req.body.mesaId,
-        clienteId: req.body.clienteId,
+        MesaMesaId: req.body.mesaId,
+        ClienteId: req.body.clienteId,
         estado: req.body.estado,
         total: req.body.total,
         fechaCreacion: req.body.fechaCreacion
@@ -65,17 +65,20 @@ exports.findAll = (req, res) => {
 exports.update = (req, res) => {
     var consumoId = req.params.consumoId;
 
-    validador = validarConsumo(req);
+  /*  validador = validarConsumo(req);
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
-    }
+    }*/
 
     Consumo.findByPk(consumoId)
         .then(consumo => {
-            consumo.nombre = req.body.nombre;
+            consumo.ClienteId=req.body.clienteId
+            consumo.total=req.body.total
+            consumo.estado = req.body.estado;
+            consumo.fechaCierre=req.body.fechaCierre
             consumo.save();
             res.send(consumo);
         })

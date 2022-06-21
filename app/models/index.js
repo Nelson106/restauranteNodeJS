@@ -51,5 +51,6 @@ db.Consumo.belongsTo(db.Mesas,{foreignkey:"mesaId"});
 db.Cliente.hasMany(db.Consumo,{foreignkey:"clienteId"});
 db.Consumo.belongsTo(db.Cliente,{foreignkey:"consumoId"});
 
-
+db.Producto.hasMany(db.DetalleConsumo,{foreignkey:"Id"});
+db.DetalleConsumo.belongsTo(db.Producto);
 module.exports = db;

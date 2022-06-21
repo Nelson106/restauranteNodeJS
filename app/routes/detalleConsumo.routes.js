@@ -1,6 +1,5 @@
-
 module.exports = app => {
-    const detalleConsumo = require("../controllers/detalleConsumodao.controller.js");
+    const detalleConsumo = require("../controllers/detalleConsumodao.Controller.js");
     var router = require("express").Router();
     //rutas de detalleConsumo 
     router.post("/", detalleConsumo.create);

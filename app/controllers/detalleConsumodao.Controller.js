@@ -5,19 +5,18 @@ const modeloConsumo = db.Consumo;
 
 exports.create = (req, res) => {
     // Validate request
-    validador = validarDetalle(req);
+   /* validador = validarDetalle(req);
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
-    }
+    }*/
     // crea un detalle de consumo
     const detalleConsumo = {
-        detalleConsumoId: req.body.detalleConsumoId,
-        productoId: req.body.productoId,
+        ProductoProductoId: req.body.productoId,
         cantidad: req.body.cantidad,
-        ConsumoConsumoId: req.body.consumoConsumoId
+        ConsumoId: req.body.consumoConsumoId
     };
     // Guardamos a la base de datos
     DetalleConsumo.create(detalleConsumo)
@@ -73,7 +72,6 @@ exports.update = (req, res) => {
 
     DetalleConsumo.findByPk(detalleConsumoId)
         .then(detalleConsumo => {
-            detalleConsumo.productoId = req.body.productoId;
             detalleConsumo.cantidad = req.body.cantidad;
             consumo.save();
             res.send(detalleConsumo);
