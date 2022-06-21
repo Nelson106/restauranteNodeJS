@@ -1,11 +1,15 @@
 const db = require("../models");
 const Consumo = db.Consumo;
 const Op = db.Sequelize.Op;
+const modeloMesas = require("../models").Mesas
+const modeloCliente = require("../models").Cliente
+
+
 
 exports.create = (req, res) => {
     // Validate request
     validador = validarConsumo(req);
-    if (!validador.isValid || req.consumo == 'cerrado')  {
+    if (!validador.isValid || req.consumo == 'cerrado') {
         res.status(400).send({
             message: validador.message
         });
@@ -15,9 +19,10 @@ exports.create = (req, res) => {
     const consumo = {
         mesaId: req.body.mesaId,
         clienteId: req.body.clienteId,
-        estado: req.body.estado,
+        estado: "abierto",
         total: req.body.total,
-        fechaCreacion: req.body.fechaCreacion
+        fechaCreacion: req.body.fechaCreacion,
+        fechaCierre: req.body.fechaCierre
     };
     // Guardamos a la base de datos
     Consumo.create(consumo)
@@ -46,8 +51,8 @@ exports.findOne = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const nombre = req.query.nombre;
-    var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
+    const estado = req.query.estado;
+    var condition = estado ? { nombre: { [Op.iLike]: `%${estado}%` } } : null;
 
     Consumo.findAll({ where: condition })
         .then(data => {
@@ -61,6 +66,37 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.findAllByMesas = (req, res) => {
+    const mesaId = req.params.mesaId;
+    var condition = mesaId ? { mesaId: { [Op.eq]: mesaId } } : null;
+
+    Consumo.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las consumos por idMesa."
+            });
+        });
+};
+
+exports.findAllByCliente = (req, res) => {
+    const clienteId = req.params.clienteId;
+    var condition = clienteId ? { clienteId: { [Op.eq]: clienteId } } : null;
+    
+    Consumo.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener los consumo del cliente."
+            });
+        });
+};
 
 exports.update = (req, res) => {
     var consumoId = req.params.consumoId;
@@ -75,7 +111,9 @@ exports.update = (req, res) => {
 
     Consumo.findByPk(consumoId)
         .then(consumo => {
-            consumo.nombre = req.body.nombre;
+            consumo.clienteId = req.body.clienteId;
+            consumo.estado = req.body.estado;
+            consumo.fechaCierre = req.body.fechaCierre;
             consumo.save();
             res.send(consumo);
         })
@@ -101,6 +139,22 @@ exports.delete = (req, res) => {
         });
 };
 
+exports.filterCliente = (req, res) => {
+
+    const id = req.body.ClienteId
+    let c = parseInt(id)
+    Reserva.findAll({ where: { ClienteId: c }, include: [{ model: modeloRestaurante }, { model: modeloMesa }, { model: modeloCliente }] })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener las reservas."
+            });
+        });
+};
+
 function validarConsumo(req) {
     if (!req.body.mesaId) {
         return {
@@ -112,12 +166,6 @@ function validarConsumo(req) {
         return {
             isValid: false,
             message: "Debe enviar clienteId."
-        };
-    }
-    if (!req.body.estado) {
-        return {
-            isValid: false,
-            message: "Debe enviar estado cerrado o abierto."
         };
     }
     if (!req.body.total) {

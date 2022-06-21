@@ -9,8 +9,8 @@ module.exports = app => {
     router.delete("/:consumoId", consumo.delete);
     router.get("/:consumoId", consumo.findOne);
     //rutas para filtros
-    //router.post('/mesa', consumo.filterMesa);
-    //router.post('/cliente', consumo.filterCliente);
+    router.get("/mesa/:mesaId", consumo.findAllByMesas);
+    router.get('/cliente/:clienteId', consumo.findAllByCliente);
     app.use('/api/consumo', router);
 };
 
