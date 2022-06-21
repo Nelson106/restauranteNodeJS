@@ -23,21 +23,23 @@ const CompRestauranteMesas = () =>{
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <th>Lista de Reservas</th>
+                    <th>Lista de Mesas</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
-                                <th>Id</th>
-                                <th>Mesa</th>
+                                <th>Nombre</th>
                                 <th>Restaurante</th>
+                                <th>Piso</th>
+                                <th>Capacidad</th>
                             </tr>
                         </thead>
                         <tbody>
                             {mesas.map ((mesa)=>(
                                 <tr key={mesa.mesaId}>
-                                    <td>{mesa.mesaId}</td>
                                     <td>{mesa.nombreMesa}</td>
                                     <td>{mesa.Restaurante.nombre}</td>
+                                    <td>{mesa.piso}</td>
+                                    <td>{mesa.capacidad} personas</td>
                                 </tr>
                             ))}
                         </tbody>

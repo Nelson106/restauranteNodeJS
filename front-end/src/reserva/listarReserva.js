@@ -34,6 +34,7 @@ const CompListarReservas=() =>{
         <div className="container">
             <div className="row">
                 <div className="col">
+                    <Link to="/crearReserva" className='btn btn-primary mt-2 mb-2'>Crear  reserva <i className='fa-solid fa-notebook'></i></Link>
                     <th>Lista de Reservas</th>
                     <table className="table">
                         <thead className="table-primary">

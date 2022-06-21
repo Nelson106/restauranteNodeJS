@@ -34,7 +34,6 @@ const CompListarMesa=() =>{
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Restaurante</th>
                                 <th>Piso</th>
@@ -45,7 +44,6 @@ const CompListarMesa=() =>{
                         <tbody>
                             {mesas.map ((mesa)=>(
                                 <tr key={mesa.mesaId}>
-                                    <td>{mesa.mesaId}</td>
                                     <td>{mesa.nombreMesa}</td>
                                     <td>{mesa.Restaurante.nombre}</td>
                                     <td>{mesa.piso}</td>
