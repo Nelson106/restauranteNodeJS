@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     const detalleConsumo = {
         ProductoProductoId: req.body.productoId,
         cantidad: req.body.cantidad,
-        ConsumoId: req.body.consumoConsumoId
+        ConsumoId: req.body.consumoId
     };
     // Guardamos a la base de datos
     DetalleConsumo.create(detalleConsumo)
