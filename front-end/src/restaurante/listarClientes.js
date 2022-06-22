@@ -30,7 +30,6 @@ const CompListarClientes=() =>{
         
     },[])
     useEffect(() =>{
-        
         getMesa()
     },[])
     useEffect(() =>{
@@ -38,7 +37,6 @@ const CompListarClientes=() =>{
         
     },[])
     
-
     const getMesa = async() =>{
         const res = await axios.get(URIMESA+"/"+mesaId)
         setMesa(res.data)
@@ -80,8 +78,9 @@ const CompListarClientes=() =>{
    const TerminarConsumo= async(e) =>{
     e.preventDefault()
     let bool=false;
+    let fechaCierre=new Date()
     await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
-    await axios.put(URIC+"/"+Consumo[0].id,{estado:"cerrado"})
+    await axios.put(URIC+"/"+Consumo[0].id,{estado:"cerrado",fechaCierre:fechaCierre})
     navigate('/reservas')
    }
 
@@ -117,12 +116,14 @@ const CompListarClientes=() =>{
                        <tr> 
                             <th>TOTAL</th>
                             <th>Cliente</th>
+                            
                         </tr>
                         <tr key={Consumo[0].id}>
                                 <td>{Consumo[0].total}</td>
                                 <td>{Cliente[0].nombre}</td>
+                               
                             </tr>
-                            
+
                     </tbody>
                 </table>
             </div>

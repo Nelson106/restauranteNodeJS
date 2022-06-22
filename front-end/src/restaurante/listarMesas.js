@@ -13,6 +13,7 @@ const CompRestauranteMesas = () =>{
         getMesas()
     },[])
 
+    
     //procedimiento para mostrar todas las Mesas
     const getMesas = async() =>{
         const res = await axios.post(URIR,{RestauranteRestauranteId:restauranteId})
@@ -27,8 +28,7 @@ const CompRestauranteMesas = () =>{
                     <table className="table">
                         <thead className="table-primary">
                             <tr>
-                                <th>Id</th>
-                                <th>Mesa</th>
+                                <th>Nombre</th>
                                 <th>Restaurante</th>
                                 <th>Acción</th>
                             </tr>
@@ -36,7 +36,6 @@ const CompRestauranteMesas = () =>{
                         <tbody>
                             {mesas.map ((mesa)=>(
                                 <tr key={mesa.mesaId}>
-                                    <td>{mesa.mesaId}</td>
                                     <td>{mesa.nombreMesa}</td>
                                     <td>{mesa.Restaurante.nombre}</td>
                                     <td>
