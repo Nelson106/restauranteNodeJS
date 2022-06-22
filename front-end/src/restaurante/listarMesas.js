@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
-import {useParams ,useNavigate } from "react-router-dom";
+import {useParams  } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const URI='http://localhost:9090/api/reservas/'
@@ -31,6 +31,7 @@ const CompRestauranteMesas = () =>{
                                 <th>Restaurante</th>
                                 <th>Piso</th>
                                 <th>Capacidad</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,9 @@ const CompRestauranteMesas = () =>{
                                     <td>{mesa.Restaurante.nombre}</td>
                                     <td>{mesa.piso}</td>
                                     <td>{mesa.capacidad} personas</td>
+                                    <td>
+                                        <Link to={'mesas/' + mesa.mesaId } className='btn btn-info'><i className="fa-solid fa-table"></i> Elegir mesa </Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

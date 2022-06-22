@@ -115,23 +115,23 @@ exports.findAll = (req, res) => {
 
 
 exports.filter = (req, res) => {
-    const restaurante = req.body.restauranteId;
-    const fechaString = req.body.fecha;
-    const clienteId = req.body.clienteId;
+    const restaurante = req.params.restauranteId;
+    const fechaString = req.params.fecha;
+    const clienteId = req.params.clienteId;
     var condition = null;
     let fecha = Date.parse(fechaString);
 
     if (clienteId) {
         condition = {
-            restauranteId: restaurante,
+            RestauranteRestauranteId: restaurante,
             fecha: {
                 [Op.eq]: fecha
             },
-            clienteId: clienteId
+            ClienteId: clienteId
         }
     }else{
         condition = {
-            restauranteId: restaurante,
+            RestauranteRestauranteId: restaurante,
             fecha: {
                 [Op.eq]: fecha
             }
@@ -142,7 +142,7 @@ exports.filter = (req, res) => {
         where: condition,
         order: [
             ['horario'],
-            ['mesaId']
+            ['MesaMesaId']
         ]
     })
         .then(data => {

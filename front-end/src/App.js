@@ -25,6 +25,8 @@ import CompCrearCategoria from './categoria/crearCategoria';
 import CompListarProducto from './producto/listarProducto';
 import CompEditarProducto from './producto/editarProducto';
 import CompCrearProducto from './producto/crearProducto';
+import CompRestauranteMesasClientes from './restaurante/listarClientes';
+
 
 
 
@@ -73,6 +75,9 @@ function App() {
               <Route path='/cliente' element={<CompListarClientes />} />
               <Route path='/cliente/crear' element={<CompCrearCliente />} />
               <Route path='/cliente/reservas/:clienteId' element={ <CompClienteReservas/>}/>
+              <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId' element={ <CompRestauranteMesasClientes/>}/>
+              
+
 
 
             </Routes>

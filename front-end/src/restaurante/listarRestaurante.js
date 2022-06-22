@@ -49,7 +49,7 @@ const CompListarRestaurantes=() =>{
                                     <td>{Restaurantes.nombre}</td>
                                     <td>{Restaurantes.direccion}</td>
                                     <td>
-                                        <Link to={'mesas/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-table"></i>  Ver mesas </Link>
+                                        <Link to={'restaurante/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-table"></i>  Ver mesas </Link>
                                     </td>
                                     <td>
                                         <Link to={'reservas/' + Restaurantes.restauranteId} className='btn btn-info'><i className="fa-solid fa-file-lines"></i>  Ver reservas </Link>

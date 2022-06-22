@@ -51,6 +51,7 @@ const CompListarMesa=() =>{
                                     <td>
                                         <Link to={'update/' + mesa.mesaId} className='btn btn-info'><i className="fa-solid fa-pen-to-square"></i></Link>
                                         <button onClick={()=>deleteMesas(mesa.mesaId)} className='btn btn-danger'><i className="fa-solid fa-trash-can"></i></button>
+                                        <Link to={'update/' + mesa.mesaId} className='btn btn-info'>ELEGIR MESA</Link>
                                     </td>
                                 </tr>
                             ))}
