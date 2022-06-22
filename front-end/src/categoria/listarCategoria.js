@@ -29,7 +29,7 @@ const CompListarCategorias=() =>{
 
             <div className="row">
                 <div className="col">
-                    <Link to="/categoria/crear" className='btn btn-primary mt-2 mb-2'>Añadir categoria <i className="fa-solid fa-utensils"></i></Link>
+                    <Link to="/categoria/crear" className='btn btn-primary mt-2 mb-2'>Añadir categoria <i className="fa-solid fa-filter-list"></i></Link>
                     <th>Lista de Categorias</th>
                     <table className="table">
                         <thead className="table-primary">

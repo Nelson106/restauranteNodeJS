@@ -9,7 +9,7 @@ const CompCrearProducto = () => {
     const [title,setTitle]= useState('')
     const [precio,setPrecio]= useState('')
 
-    const [categpriaId,setCategoriaId]= useState('')
+    const [categoriaId,setCategoriaId]= useState('')
 
     const [categorias,setCategorias]=useState([])
     const [categoriaElegidaId,setCategoriaElegida]=useState([])
@@ -30,7 +30,7 @@ const CompCrearProducto = () => {
         e.preventDefault()
         console.log("title",categoriaElegidaId)
 
-        await axios.post(URI,{nombre:title,precioVenta:precio,CategoriumCategproaId:categoriaElegidaId})
+        await axios.post(URI,{nombre:title,precioVenta:precio,CategoriumCategoriaId:categoriaElegidaId})
 
       
         navigate('/producto')
@@ -82,7 +82,15 @@ const CompCrearProducto = () => {
                     </div>
 
                 </div>
-                                
+                <div className="mb-3">
+                    <label className="form-label">Precio</label>
+                    <input 
+                        value={precio} 
+                        onChange={(e)=> setPrecio(e.target.value)}
+                        type="text"
+                        className="form-control"
+                    />
+                </div>                
                 <button type="submit" className="btn btn-primary">Guardar</button>
            </form>
         </div>
