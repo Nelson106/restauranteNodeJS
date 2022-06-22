@@ -25,6 +25,10 @@ module.exports=(sequelize,Sequelize) =>{
             type:Sequelize.INTEGER,
             defaultValue:1
         },
+        ocupado:{
+            type:Sequelize.BOOLEAN,
+            defaultValue:false
+        }
         
 
     });

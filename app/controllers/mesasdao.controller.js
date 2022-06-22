@@ -68,13 +68,13 @@ exports.findAll = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
     
-    validador = validarMesa(req)
+   /* validador = validarMesa(req)
     if (!validador.isValid) {
         res.status(400).send({
             message: validador.message
         });
         return;
-    }
+    }*/
     
     Mesa.findByPk(id)
         .then(mesas => {
@@ -83,6 +83,7 @@ exports.update = (req, res) => {
             mesas.posicionY= req.body.posicionY;
             mesas.piso=req.body.piso;
             mesas.capacidad=req.body.capacidad;
+            mesas.ocupado=req.body.ocupado;
             mesas.RestauranteRestauranteId=req.body.restauranteId;
             mesas.save();
             res.send(mesas);

@@ -2,59 +2,126 @@
 import axios from "axios";
 //import { use } from "express/lib/router";
 import { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+
 const URI='http://localhost:9090/api/cliente'
 const URIP='http://localhost:9090/api/producto'
-const URIDC='http://localhost:9090/api/detalleConsumo'
+const URIDC='http://localhost:9090/api/detalleConsumo/consumos'
 const URIC='http://localhost:9090/api/consumo'
-
+const URIMESA='http://localhost:9090/api/mesas'
+const URIESTADO='http://localhost:9090/api/consumo/consumoEstado'
 const CompListarClientes=() =>{
     const [Cliente,setCliente]=useState([])
+    const [ClienteElegido,setClienteElegido]=useState([])
     const [Producto,setProducto]=useState([])
     const [ProductosElegidos,setProductosElegidos]=useState([])
+    const [Mesa,setMesa]=useState([])
+    const [Consumo,setConsumo]=useState([])
+    const [Detalles,setDetalles]=useState([])
 
-
+    const navigate=useNavigate()
     const {restauranteId} = useParams()
     const {mesaId} = useParams()
    
     useEffect(() =>{
         getClientes()
+        
     },[])
-
+    useEffect(() =>{
+        
+        getMesa()
+    },[])
+    useEffect(() =>{
+        getConsumo()
+        
+    },[])
     
+
+    const getMesa = async() =>{
+        const res = await axios.get(URIMESA+"/"+mesaId)
+        setMesa(res.data)
+    }
+    const getConsumo = async() =>{
+        const res = await axios.post(URIESTADO,{estado:'abierto'})
+    
+        setConsumo(res.data)
+       console.log("aaaaaaaaaaaaa",Consumo)
+        getDetalles(Consumo)
+    }
     const getClientes = async() =>{
        const res = await axios.get(URI)
        setCliente(res.data)
     }
-
-  
+    const getDetalles= async(Consumo)=>{
+        if(Consumo.length!=0){
+            const res = await axios.post(URIDC,{consumoId:Consumo[0].id})
+            setDetalles(res.data)
+        }
+    }
+    console.log("Mesaaaa",Mesa)
+    console.log("Consumo",Consumo)
+    console.log("detalleess",Detalles)
+    
     const guardarConsumo = async (e) =>{
        e.preventDefault()
        // const res = await axios.get(URIMESA+'/'+mesaId)
         let fechaCreacion=new Date()
-        await axios.post(URIC,{estado:"abierto",mesaId:mesaId,clienteId:Cliente,
+        await axios.post(URIC,{estado:"abierto",mesaId:mesaId,clienteId:ClienteElegido,
         fechaCreacion:fechaCreacion})
-
-        
         ///setMesas(res.data)
-     
-       
-       // navigate('/reservas')
+        let bool=true;
+        await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
+        navigate('/restaurante/cliente/'+ClienteElegido)
     }
-
-
-    
+      
+   
     // console.log("Productossss",ProductosElegidos)
-    return (
+
+    if(Mesa.ocupado==true){
+        return (
        
+            <div className="container">
+        <div className="row">
+            <div className="col">
+               
+                <th>Detalles</th>
+                <table className="table">
+                    <thead className="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Cantidad</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Detalles.map ((detalle)=>(
+                            <tr key={detalle.id}>
+                                <td>{detalle.id}</td>
+                                <td>{detalle.cantidad}</td>
+                                <td>{detalle.Producto.nombre}</td>
+                                <td>{detalle.Producto.precioVenta}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+            
+          
+        )
+    }else{
+        return(
+            <form  onSubmit={guardarConsumo}> 
         <div className="container">
 
             <div className="row">
                 <div className="col">
-                    <Link to="/cliente/crear" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-circle-user"></i> Iniciar Consumo</Link>
+                   
                     <th>Lista de Clientes</th>
                     <table className="table">
                         <thead className="table-primary">
@@ -67,17 +134,17 @@ const CompListarClientes=() =>{
                             </tr>
                         </thead>
                         <tbody>
-                            {Cliente.map ((Cliente)=>(
-                                <tr key={Cliente.id}>
-                                    <td>{Cliente.id}</td>
-                                    <td>{Cliente.nombre}</td>
-                                    <td>{Cliente.apellido}</td>
-                                    <td>{Cliente.cedula}</td>
+                            {Cliente.map ((Client)=>(
+                                <tr key={Client.id}>
+                                    <td>{Client.id}</td>
+                                    <td>{Client.nombre}</td>
+                                    <td>{Client.apellido}</td>
+                                    <td>{Client.cedula}</td>
                                     <td> <input
                      
                                              type="checkbox"
-                                             value={Cliente.id}
-                                             onChange={(e)=> setCliente(e.target.value)}
+                                             value={Client.id}
+                                             onChange={(e)=> setClienteElegido(e.target.value)}
                                             
                                      /></td>
                                    
@@ -90,8 +157,11 @@ const CompListarClientes=() =>{
                 </div>
             </div>
         </div>
-       
-    )
+        <button type="submit" className="btn btn-primary">Guardar</button>
+        </form>
+        )
+    }
+    
 }
 
 export default CompListarClientes;

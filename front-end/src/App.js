@@ -21,7 +21,7 @@ import CompListarReservasF from './reserva/listarReservasFecha';
 import CompRestauranteMesas from './restaurante/listarMesas';
 import CompRestauranteMesasClientes from './restaurante/listarClientes';
 
-
+import CompCrearConsumo from './restaurante/iniciarConsumo';
 
 
 //import { Router } from 'express';
@@ -58,6 +58,7 @@ function App() {
               <Route path='/cliente/crear' element={<CompCrearCliente />} />
               <Route path='/cliente/reservas/:clienteId' element={ <CompClienteReservas/>}/>
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId' element={ <CompRestauranteMesasClientes/>}/>
+              <Route path='/restaurante/cliente/:clienteId' element={ <CompCrearConsumo/>}/>
               
 
 

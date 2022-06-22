@@ -7,6 +7,7 @@ module.exports = app => {
     router.get("/", detalleConsumo.findAll);
     router.delete("/:detalleConsumoId", detalleConsumo.delete);
     router.get("/:detalleConsumoId", detalleConsumo.findOne);
+    router.post("/consumos", detalleConsumo.getDetalleConsumo);
     app.use('/api/detalleConsumo', router);
 
     //rutas para filtros

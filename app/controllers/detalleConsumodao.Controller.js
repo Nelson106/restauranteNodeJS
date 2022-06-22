@@ -2,7 +2,22 @@ const db = require("../models");
 const DetalleConsumo = db.DetalleConsumo;
 const Op = db.Sequelize.Op;
 const modeloConsumo = db.Consumo;
-
+const modeloProducto=db.Producto
+exports.getDetalleConsumo = (req,res)=>{
+    const id=req.body.consumoId
+    console.log("aaaaaaaaaaaaaaaaa",id)
+    var condition ={ConsumoId:id}
+    DetalleConsumo.findAll({where: condition, include :[{model:modeloProducto}]})
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Ocurrio un error al obtener los detalles de consumo."
+        });
+    });
+}
 exports.create = (req, res) => {
     // Validate request
    /* validador = validarDetalle(req);

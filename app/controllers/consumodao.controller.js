@@ -2,6 +2,30 @@ const db = require("../models");
 const Consumo = db.Consumo;
 const Op = db.Sequelize.Op;
 
+exports.getConsumoAbierto=(req,res)=>{
+    const estado=req.body.estado
+    var condition ={estado:estado}
+    Consumo.findAll({where: condition})
+        .then(data =>{
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener los consumos."
+            });
+        });
+}
+exports.getConsumoCliente=(req,res)=>{
+    const clienteId = req.params.clienteId;
+    var condition =  { ClienteId: clienteId } 
+
+    Consumo.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        
+}
 exports.create = (req, res) => {
     // Validate request
   /*  validador = validarConsumo(req);

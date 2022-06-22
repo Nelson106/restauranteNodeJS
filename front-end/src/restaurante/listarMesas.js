@@ -23,7 +23,7 @@ const CompRestauranteMesas = () =>{
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <th>Lista de Reservas</th>
+                    <th>Lista de Mesas</th>
                     <table className="table">
                         <thead className="table-primary">
                             <tr>

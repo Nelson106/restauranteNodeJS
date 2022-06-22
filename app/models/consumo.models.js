@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             enum:['abierto','cerrado'],
             default:'abierto',
-            allowNull: false,
+            
         },
         total: {
             type: Sequelize.BIGINT,
@@ -17,11 +17,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         fechaCreacion: {
             type: Sequelize.DATE,
-            allowNull: true
+            
         },
         fechaCierre: {
             type: Sequelize.DATE,
-            allowNull: true
+            
         }
     });
     return Consumo;
