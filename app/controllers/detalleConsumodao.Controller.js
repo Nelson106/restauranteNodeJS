@@ -5,7 +5,7 @@ const modeloConsumo = db.Consumo;
 const modeloProducto=db.Producto
 exports.getDetalleConsumo = (req,res)=>{
     const id=req.body.consumoId
-    console.log("aaaaaaaaaaaaaaaaa",id)
+    
     var condition ={ConsumoId:id}
     DetalleConsumo.findAll({where: condition, include :[{model:modeloProducto}]})
     .then(data => {

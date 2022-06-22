@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 const URI='http://localhost:9090/api/cliente'
 const URIP='http://localhost:9090/api/producto'
 const URIDC='http://localhost:9090/api/detalleConsumo/consumos'
+const URID='http://localhost:9090/api/detalleConsumo'
 const URIC='http://localhost:9090/api/consumo'
 const URIMESA='http://localhost:9090/api/mesas'
 const URIESTADO='http://localhost:9090/api/consumo/consumoEstado'
@@ -20,7 +21,6 @@ const CompListarClientes=() =>{
     const [Mesa,setMesa]=useState([])
     const [Consumo,setConsumo]=useState([])
     const [Detalles,setDetalles]=useState([])
-
     const navigate=useNavigate()
     const {restauranteId} = useParams()
     const {mesaId} = useParams()
@@ -62,6 +62,7 @@ const CompListarClientes=() =>{
     }
     console.log("Mesaaaa",Mesa)
     console.log("Consumo",Consumo)
+
     console.log("detalleess",Detalles)
     
     const guardarConsumo = async (e) =>{
@@ -76,16 +77,23 @@ const CompListarClientes=() =>{
         navigate('/restaurante/cliente/'+ClienteElegido)
     }
       
-   
-    // console.log("Productossss",ProductosElegidos)
+   const TerminarConsumo= async(e) =>{
+    e.preventDefault()
+    let bool=false;
+    await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
+    await axios.put(URIC+"/"+Consumo[0].id,{estado:"cerrado"})
+    navigate('/reservas')
+   }
 
+    // console.log("Productossss",ProductosElegidos)
     if(Mesa.ocupado==true){
         return (
-       
+            <form  onSubmit={TerminarConsumo}> 
             <div className="container">
         <div className="row">
             <div className="col">
-               
+            
+        
                 <th>Detalles</th>
                 <table className="table">
                     <thead className="table-primary">
@@ -93,8 +101,8 @@ const CompListarClientes=() =>{
                             <th>ID</th>
                             <th>Cantidad</th>
                             <th>Producto</th>
-                            <th>Precio</th>
-                            
+                           <th>Precio</th>
+                    
                         </tr>
                     </thead>
                     <tbody>
@@ -106,13 +114,24 @@ const CompListarClientes=() =>{
                                 <td>{detalle.Producto.precioVenta}</td>
                             </tr>
                         ))}
+                       <tr> 
+                            <th>TOTAL</th>
+                            <th>Cliente</th>
+                        </tr>
+                        <tr key={Consumo[0].id}>
+                                <td>{Consumo[0].total}</td>
+                                <td>{Cliente[0].nombre}</td>
+                            </tr>
+                            
                     </tbody>
                 </table>
             </div>
         </div>
+    
     </div>
-            
-          
+    <button type="submit" className="btn btn-primary">Terminar Consumo</button>
+    
+    </form>
         )
     }else{
         return(
