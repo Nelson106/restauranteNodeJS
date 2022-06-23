@@ -1,11 +1,14 @@
 const db = require("../models");
 const Consumo = db.Consumo;
 const Op = db.Sequelize.Op;
-
+const modelCliente=db.Cliente;
 exports.getConsumoAbierto=(req,res)=>{
     const estado=req.body.estado
+    //const mesaId=req.body.mesaId
+
+    //var condition ={estado:estado,MesaMesaId:mesaId}
     var condition ={estado:estado}
-    Consumo.findAll({where: condition})
+    Consumo.findAll({where: condition,include :[{model:modelCliente}]})
         .then(data =>{
             res.send(data);
         })

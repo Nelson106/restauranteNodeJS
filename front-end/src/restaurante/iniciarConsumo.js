@@ -20,9 +20,9 @@ const CompIniciarConsumo=() =>{
     const [Consumo,setConsumo]=useState([])
 
 
-    /*const {restauranteId} = useParams()
+    const {restauranteId} = useParams()
     const {mesaId} = useParams()
-   */
+   
     const navigate=useNavigate()
     const {clienteId} = useParams()
     
@@ -44,6 +44,7 @@ const CompIniciarConsumo=() =>{
        setProducto(res.data)
     }
     
+
     const guardarConsumo = async (e) =>{
        e.preventDefault()
        // const res = await axios.get(URIMESA+'/'+mesaId)

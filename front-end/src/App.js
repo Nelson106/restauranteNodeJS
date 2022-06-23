@@ -21,6 +21,7 @@ import CompListarReservasF from './reserva/listarReservasFecha';
 import CompRestauranteMesas from './restaurante/listarMesas';
 
 import CompRestauranteMesasClientes from './restaurante/listarClientes';
+import CompRestauranteCambiarCliente from './restaurante/cambiarCliente';
 
 import CompListarCategorias from './categoria/listarCategoria';
 import CompEditarCategoria from './categoria/editarCategoria';
@@ -79,6 +80,10 @@ function App() {
               <Route path='/cliente/reservas/:clienteId' element={ <CompClienteReservas/>}/>
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId' element={ <CompRestauranteMesasClientes/>}/>
               <Route path='/restaurante/cliente/:clienteId' element={ <CompCrearConsumo/>}/>
+
+              <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId/consumo/:consumoId' element={ <CompRestauranteCambiarCliente/>}/>
+
+              
               
 
 

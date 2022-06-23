@@ -36,6 +36,8 @@ const CompListarClientes=() =>{
         getConsumo()
         
     },[])
+
+
     
     const getMesa = async() =>{
         const res = await axios.get(URIMESA+"/"+mesaId)
@@ -47,6 +49,7 @@ const CompListarClientes=() =>{
         setConsumo(res.data)
        console.log("aaaaaaaaaaaaa",Consumo)
         getDetalles(Consumo)
+
     }
     const getClientes = async() =>{
        const res = await axios.get(URI)
@@ -57,6 +60,8 @@ const CompListarClientes=() =>{
             const res = await axios.post(URIDC,{consumoId:Consumo[0].id})
             setDetalles(res.data)
         }
+
+
     }
     console.log("Mesaaaa",Mesa)
     console.log("Consumo",Consumo)
@@ -102,7 +107,7 @@ const CompListarClientes=() =>{
                             <th>Producto</th>
                            <th>Precio</th>
                     
-                        </tr>
+                       </tr>
                     </thead>
                     <tbody>
                         {Detalles.map ((detalle)=>(
@@ -120,17 +125,20 @@ const CompListarClientes=() =>{
                         </tr>
                         <tr key={Consumo[0].id}>
                                 <td>{Consumo[0].total}</td>
-                                <td>{Cliente[0].nombre}</td>
-                               
+                                <td>{Consumo[0].Cliente.nombre}</td>
+                    
                             </tr>
 
                     </tbody>
                 </table>
             </div>
         </div>
-    
+
+
     </div>
     <button type="submit" className="btn btn-primary">Terminar Consumo</button>
+    <Link to={'consumo/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Cambiar Cliente </Link>
+    <Link to={'consumo/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Agregar mas productos </Link>
     
     </form>
         )
