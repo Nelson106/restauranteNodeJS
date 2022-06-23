@@ -32,6 +32,7 @@ import CompCrearProducto from './producto/crearProducto';
 
 
 import CompCrearConsumo from './restaurante/iniciarConsumo';
+import CompAgregarProducto from './restaurante/agregarProductos';
 
 
 //import { Router } from 'express';
@@ -81,7 +82,7 @@ function App() {
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId' element={ <CompRestauranteMesasClientes/>}/>
               <Route path='/restaurante/cliente/:clienteId/mesa/:mesaId' element={ <CompCrearConsumo/>}/>
 
-              <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId/consumo/:consumoId' element={ <CompRestauranteCambiarCliente/>}/>
+              <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId/consumoProducto/:consumoId' element={ <CompAgregarProducto/>}/>
 
               
               

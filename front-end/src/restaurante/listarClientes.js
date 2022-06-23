@@ -135,14 +135,13 @@ const CompListarClientes=() =>{
             </div>
         </div>
 
-
     </div>
     <button type="submit" className="btn btn-primary">Terminar Consumo</button>
     <Link to={'consumo/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Cambiar Cliente </Link>
     <Link to={'consumoProducto/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Agregar mas productos </Link>
-    
     </form>
         )
+        
     }else{
         return(
             <form  onSubmit={guardarConsumo}> 
