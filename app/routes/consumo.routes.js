@@ -11,6 +11,7 @@ module.exports = app => {
     
     router.get("/consumoCliente/:clienteId", consumo.getConsumoCliente);
     router.post("/consumoEstado/", consumo.getConsumoAbierto);
+    router.post("/consumoEstadoCliente/", consumo.getConsumoAbiertoCliente);
     //rutas para filtros
     //router.post('/mesa', consumo.filterMesa);
     //router.post('/cliente', consumo.filterCliente);

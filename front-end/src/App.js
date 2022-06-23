@@ -79,7 +79,7 @@ function App() {
               <Route path='/cliente/crear' element={<CompCrearCliente />} />
               <Route path='/cliente/reservas/:clienteId' element={ <CompClienteReservas/>}/>
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId' element={ <CompRestauranteMesasClientes/>}/>
-              <Route path='/restaurante/cliente/:clienteId' element={ <CompCrearConsumo/>}/>
+              <Route path='/restaurante/cliente/:clienteId/mesa/:mesaId' element={ <CompCrearConsumo/>}/>
 
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId/consumo/:consumoId' element={ <CompRestauranteCambiarCliente/>}/>
 

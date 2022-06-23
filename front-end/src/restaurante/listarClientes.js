@@ -44,7 +44,7 @@ const CompListarClientes=() =>{
         setMesa(res.data)
     }
     const getConsumo = async() =>{
-        const res = await axios.post(URIESTADO,{estado:'abierto'})
+        const res = await axios.post(URIESTADO,{estado:'abierto',mesaId:mesaId})
     
         setConsumo(res.data)
        console.log("aaaaaaaaaaaaa",Consumo)
@@ -77,9 +77,8 @@ const CompListarClientes=() =>{
         ///setMesas(res.data)
         let bool=true;
         await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
-        navigate('/restaurante/cliente/'+ClienteElegido)
-    }
-      
+        navigate('/restaurante/cliente/'+ClienteElegido+"/mesa/"+mesaId)
+    }   
    const TerminarConsumo= async(e) =>{
     e.preventDefault()
     let bool=false;
@@ -87,7 +86,9 @@ const CompListarClientes=() =>{
     await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
     await axios.put(URIC+"/"+Consumo[0].id,{estado:"cerrado",fechaCierre:fechaCierre})
     navigate('/reservas')
+
    }
+
 
     // console.log("Productossss",ProductosElegidos)
     if(Mesa.ocupado==true){
@@ -138,7 +139,7 @@ const CompListarClientes=() =>{
     </div>
     <button type="submit" className="btn btn-primary">Terminar Consumo</button>
     <Link to={'consumo/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Cambiar Cliente </Link>
-    <Link to={'consumo/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Agregar mas productos </Link>
+    <Link to={'consumoProducto/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Agregar mas productos </Link>
     
     </form>
         )

@@ -4,10 +4,28 @@ const Op = db.Sequelize.Op;
 const modelCliente=db.Cliente;
 exports.getConsumoAbierto=(req,res)=>{
     const estado=req.body.estado
-    //const mesaId=req.body.mesaId
+    const mesaId=req.body.mesaId
 
     //var condition ={estado:estado,MesaMesaId:mesaId}
-    var condition ={estado:estado}
+    var condition ={estado:estado,MesaMesaId:mesaId}
+    Consumo.findAll({where: condition,include :[{model:modelCliente}]})
+        .then(data =>{
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocurrio un error al obtener los consumos."
+            });
+        });
+}
+exports.getConsumoAbiertoCliente=(req,res)=>{
+    const estado=req.body.estado
+    const mesaId=req.body.mesaId
+    const clienteId=req.body.clienteId
+
+    var condition ={estado:estado,MesaMesaId:mesaId,ClienteId:clienteId}
+   // var condition ={estado:estado}
     Consumo.findAll({where: condition,include :[{model:modelCliente}]})
         .then(data =>{
             res.send(data);
