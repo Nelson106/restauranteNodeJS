@@ -48,16 +48,17 @@ const CompListarClientes=() =>{
     
         setConsumo(res.data)
        console.log("aaaaaaaaaaaaa",Consumo)
-        getDetalles(Consumo)
+        getDetalles(res.data)
 
     }
     const getClientes = async() =>{
        const res = await axios.get(URI)
        setCliente(res.data)
     }
-    const getDetalles= async(Consumo)=>{
-        if(Consumo.length!=0){
-            const res = await axios.post(URIDC,{consumoId:Consumo[0].id})
+
+    const getDetalles= async(Consum)=>{
+        if(Consum.length!=0){
+            const res = await axios.post(URIDC,{consumoId:Consum[0].id})
             setDetalles(res.data)
         }
 
@@ -79,13 +80,16 @@ const CompListarClientes=() =>{
         await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
         navigate('/restaurante/cliente/'+ClienteElegido+"/mesa/"+mesaId)
     }   
+    
    const TerminarConsumo= async(e) =>{
     e.preventDefault()
     let bool=false;
     let fechaCierre=new Date()
     await axios.put(URIMESA+"/"+mesaId,{ocupado:bool})
     await axios.put(URIC+"/"+Consumo[0].id,{estado:"cerrado",fechaCierre:fechaCierre})
-    navigate('/reservas')
+    navigate("/reservas")
+    /*navigate('/restaurante/restaurante/'+restauranteId+'/mesas/'+mesaId+'/consumoProducto/'
+    +Consumo[0].id+'/pdf')*/
 
    }
 
@@ -135,13 +139,15 @@ const CompListarClientes=() =>{
             </div>
         </div>
 
+
     </div>
+
     <button type="submit" className="btn btn-primary">Terminar Consumo</button>
     <Link to={'consumo/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Cambiar Cliente </Link>
     <Link to={'consumoProducto/' + Consumo[0].id } className='btn btn-info'><i className="fa-solid fa-table"></i>Agregar mas productos </Link>
     </form>
         )
-        
+
     }else{
         return(
             <form  onSubmit={guardarConsumo}> 

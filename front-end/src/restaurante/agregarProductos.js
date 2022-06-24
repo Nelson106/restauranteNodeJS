@@ -57,12 +57,11 @@ const CompAgregarProducto=() =>{
        await axios.put(URIC+"/"+consumoId,{total:total})
        
       
-
-        navigate('/reservas')
+       navigate('/restaurante/restaurante/'+restauranteId+"/mesas/"+mesaId)
+        //navigate('/reservas')
     }
 
-    
-    
+
      
     return (
         <form  onSubmit={guardarConsumo}> 

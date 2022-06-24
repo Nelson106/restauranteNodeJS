@@ -12,20 +12,27 @@ const CompListarClientes=() =>{
     useEffect(() =>{
         getClientes()
     },[])
+    const {restauranteId} = useParams()
+    const {mesaId} = useParams()
     const {consumoId} = useParams()
     //procedimiento para mostrar todas las mesas
-
+    const navigate=useNavigate()
     const getClientes = async() =>{
        const res = await axios.get(URI)
        setCliente(res.data)
     }
-    const navigate=useNavigate()
+    
 
+
+    
     const Guardar = async() =>{
-        console.log("cliente",ClienteElegido)
+        
        await axios.put(URIC+'/'+consumoId,{clienteId:ClienteElegido})
-       
+      // navigate('/reservas')
+        navigate('/restaurante/restaurante/'+restauranteId+'/mesas/'+mesaId)
     }
+    
+
 
     return (
         <form  onSubmit={Guardar}>
@@ -52,6 +59,7 @@ const CompListarClientes=() =>{
                                     <td>{Cliente.nombre}</td>
                                     <td>{Cliente.apellido}</td>
                                     <td>{Cliente.cedula}</td>
+                                    
                                     <td> <input
                      
                                              type="checkbox"
