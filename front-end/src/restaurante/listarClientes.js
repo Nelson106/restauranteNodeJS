@@ -155,7 +155,7 @@ const CompListarClientes=() =>{
 
             <div className="row">
                 <div className="col">
-                   
+                   <Link to="/cliente/crear" className='btn btn-primary mt-2 mb-2'><i className="fa-solid fa-circle-user"></i>  Crear cliente</Link>
                     <th>Lista de Clientes</th>
                     <table className="table">
                         <thead className="table-primary">

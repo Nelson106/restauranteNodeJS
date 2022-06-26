@@ -85,8 +85,7 @@ function App() {
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId/consumoProducto/:consumoId' element={ <CompAgregarProducto/>}/>
               <Route path='/restaurante/restaurante/:restauranteId/mesas/:mesaId/consumo/:consumoId' element={ <CompRestauranteCambiarCliente/>}/>
 
-              
-
+           
               
               
 
